@@ -25,6 +25,7 @@ class HomeFragment : Fragment(){
         super.onCreate(savedInstanceState)
         Log.d(TAG, "HomeFragment - onCreate called")
 
+
     }
 
 

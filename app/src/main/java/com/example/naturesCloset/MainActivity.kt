@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.MediaStore
+import android.view.Menu
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.naturesCloset.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,25 +41,34 @@ class MainActivity : AppCompatActivity() {
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val add_photo_btn = findViewById<ImageButton>(R.id.btn_add_photo)
 
+        setSupportActionBar(binding.toolbar) //커스텀한 toolbar를 액션바로 사용
+        supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
+
         bottom_nav.setOnItemSelectedListener { item ->
 
             when(item.itemId){
                     R.id.nav_home -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
+                        binding.toolbarText.text = "My Profile"
+                        binding.wishList.visibility=View.VISIBLE
                         changeFragment(HomeFragment())
                     }
 
                     R.id.nav_contacts -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
+                        binding.wishList.visibility=View.INVISIBLE
                         changeFragment(ContactsFragment())
+                        binding.toolbarText.text = "Hello, User"
                     }
 
                     R.id.nav_photo -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.VISIBLE
+                        binding.wishList.visibility=View.INVISIBLE
                         changeFragment(PhotoFragment())
+                        binding.toolbarText.text = "Wish lists"
                     }
 
                     else -> {
@@ -79,6 +88,11 @@ class MainActivity : AppCompatActivity() {
         add_photo_btn.setOnClickListener {
             pickImagesIntent()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
     }
 
 
@@ -101,25 +115,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getContact(){
-        val contactList: MutableList<User> = ArrayList()
-        val contacts = contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        while (contacts!!.moveToNext()){
-            val name = contacts.getString(contacts.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-            val number = contacts.getString(contacts.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            val obj = User(username = name, phNum = number)
-
-            contactList.add(obj)
-        }
-        contacts.close()
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
