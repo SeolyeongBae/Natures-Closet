@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/storeItemLayout"
@@ -7,8 +8,6 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:background="@drawable/round_contacts_comp"
-    android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
     android:elevation="10dp"
     android:focusable="true"
@@ -24,75 +23,111 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
         android:gravity="center_vertical"
+        android:background="@drawable/round_contacts_comp"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="13dp"
-            android:background="@drawable/rounded_drawable"
+        <ImageView
+            android:id="@+id/Imgv"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@color/light_white"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
-
-        <TextView
-            android:id="@+id/data1Text"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/data2Text"
-            app:layout_constraintStart_toStartOf="@+id/tvIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/data3Text"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:textSize="0sp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/data2Text" />
-        <!--사람 이름, 연락처 외에 정보는 필요 없어서 지워야 하는데 텍스트뷰 3을 지우면 2도 같이 날아가버린다.
-         해결 방법을 찾기 전까지는 textsize = 0sp를 통해 disable 시킨다. -->
+            app:layout_constraintTop_toBottomOf="@+id/Imgv">
 
-        <TextView
-            android:id="@+id/data2Text"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/data3Text"
-            app:layout_constraintStart_toStartOf="@+id/tvIcon"
-            app:layout_constraintTop_toBottomOf="@id/data2Text" />
+            <TextView
+                android:id="@+id/Username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="95dp"
+                android:text="Username"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/contents"
+                app:layout_constraintEnd_toStartOf="@+id/heartBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/heartBtn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="false"
-            app:lottie_fileName="heart.json"
-            app:lottie_loop="false" />
 
+            <TextView
+                android:id="@+id/contents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="18dp"
+                android:text="contents"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@id/Username"
+                app:layout_constraintEnd_toStartOf="@+id/heartBtn"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/hashtag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="18dp"
+                android:text="#hashtag"
+                android:textcolor ="green"
+                android:textSize="12sp"
+
+                app:layout_constraintTop_toBottomOf="@id/contents"
+                app:layout_constraintEnd_toStartOf="@+id/heartBtn"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+
+                android:id="@+id/heartBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+
+                app:layout_constraintEnd_toStartOf="@+id/likeNum"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="heart.json"
+                app:lottie_loop="false" />
+
+            <TextView
+                android:id="@+id/likeNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="20dp"
+
+                android:text="12"
+                android:textcolor ="green"
+                android:textSize="12sp"
+
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
