@@ -1,27 +1,22 @@
-package com.example.miniapp
+package com.example.naturesCloset
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.miniapp.databinding.FragmentHomeBinding
+import com.example.naturesCloset.databinding.FragmentHomeBinding
 
-class GameFragment : Fragment(){
+class HomeFragment : Fragment(){
 
     private lateinit var binding: FragmentHomeBinding
 
     companion object{
         const val TAG : String = "로그"
-        fun newInstance(): GameFragment{
-            return GameFragment()
+        fun newInstance(): HomeFragment{
+            return HomeFragment()
         }
     }
 
@@ -47,9 +42,11 @@ class GameFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(HomeFragment.TAG, "HomeFragment - onCreateView() called")
+        Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
 }

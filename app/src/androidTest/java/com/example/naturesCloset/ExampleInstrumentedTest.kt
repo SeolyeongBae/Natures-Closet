@@ -1,4 +1,4 @@
-package com.example.miniapp
+package com.example.naturesCloset
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

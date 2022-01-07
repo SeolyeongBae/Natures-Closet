@@ -1,4 +1,4 @@
-package com.example.miniapp
+package com.example.naturesCloset
 
 import android.animation.ValueAnimator
 import android.graphics.Color
@@ -7,12 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
-import com.example.miniapp.ContactsFragment.Companion.TAG
-import com.example.miniapp.databinding.ContactsDataListBinding
+import com.example.naturesCloset.ContactsFragment.Companion.TAG
+import com.example.naturesCloset.databinding.ContactsDataListBinding
 import java.util.Random
 
 

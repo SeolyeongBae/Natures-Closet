@@ -1,4 +1,4 @@
-package com.example.miniapp
+package com.example.naturesCloset
 
 import android.net.Uri
 import android.os.Bundle

@@ -1,6 +1,5 @@
-package com.example.miniapp
+package com.example.naturesCloset
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.miniapp.databinding.ContactsDataListBinding
-import com.example.miniapp.databinding.FragContactsBinding
+import com.example.naturesCloset.databinding.ContactsDataListBinding
+import com.example.naturesCloset.databinding.FragContactsBinding
 
 
 class ContactsFragment : Fragment() {
