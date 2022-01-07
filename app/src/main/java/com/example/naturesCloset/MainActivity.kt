@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         User(id = "4", username = "최길동", phNum = "0100101010")
     )
 
+    var colorList : ArrayList<Colors> = arrayListOf(
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
         super.onCreate(savedInstanceState)
@@ -52,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                         add_photo_btn.visibility = View.INVISIBLE
                         binding.toolbarText.text = "My Profile"
                         binding.wishList.visibility=View.VISIBLE
+                        intent.putExtra("ColorList", colorList)
                         changeFragment(HomeFragment())
                     }
 
@@ -61,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                         binding.wishList.visibility=View.INVISIBLE
                         changeFragment(ContactsFragment())
                         binding.toolbarText.text = "Hello, User"
+                        intent.putExtra("DataList", dataList)
                     }
 
                     R.id.nav_photo -> {
@@ -99,7 +108,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl_con, fragment).commit() //fl_con의 id를 가지는 Framelayout에 fragment 배치.
-        intent.putExtra("DataList", dataList)
     }
 
     private fun pickImagesIntent(){

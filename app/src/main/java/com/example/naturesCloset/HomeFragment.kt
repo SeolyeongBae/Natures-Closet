@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(){
-
+    private lateinit var myColorAdapter: MyColorAdapter
     private lateinit var binding: FragmentHomeBinding
 
     companion object{
@@ -24,7 +26,6 @@ class HomeFragment : Fragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "HomeFragment - onCreate called")
-
 
     }
 
@@ -48,6 +49,23 @@ class HomeFragment : Fragment(){
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var list: ArrayList<Colors> =
+            requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
+        //list를 전달받는 과정이다.
+
+        myColorAdapter = MyColorAdapter(list)
+        binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+        Log.e("ContactsFragment", "Data List: ${list}")
+
+        // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
+        binding.listViewProfile.adapter = myColorAdapter
+
+
+    }
 
 
 }
