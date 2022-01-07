@@ -15,14 +15,52 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:background="@drawable/round_img"
-            android:scaleType="centerCrop"
+            android:layout_height="140dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/cat"
-            android:layout_margin="3dp"
+            android:background="@drawable/round_img"
             android:elevation="3dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/cat"
             tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_marginStart="3dp"
+            android:text="Shirt"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/pickColor"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/productName"
+            android:layout_marginStart="3dp"
+            android:background="@drawable/rounded_drawable"
+            android:textSize="12sp"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/pickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productName"
+            android:layout_toRightOf="@+id/pickColor"
+            android:layout_marginLeft="5dp"
+            android:text="My item"
+            android:textColor="@color/light_white"
+            android:textSize="10sp"
+            app:layout_constraintVertical_bias="1.0" />
+
 
     </RelativeLayout>
 

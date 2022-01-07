@@ -32,12 +32,9 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
 
-            var bgShape : GradientDrawable = binding.tvIcon.background as GradientDrawable
-            bgShape.setColor(color)
-
-            binding.data1Text.text = data_phonenum
-            binding.data2Text.text = data_name
-            binding.tvIcon.text = data_phonenum.slice(IntRange(0,0)) //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
+            binding.contents.text = data_phonenum
+            binding.Username.text = data_name
+            binding.hashtag.text = data_phonenum.slice(IntRange(0,0)) //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
 
             binding.heartBtn.setOnClickListener(View.OnClickListener {
                 if(!list[position].admin){

@@ -23,8 +23,12 @@ class MainActivity : AppCompatActivity() {
     private var images = ArrayList<String>()
     private val PICK_IMAGES_CODE = 0
 
-    var dataList : ArrayList<User> = arrayListOf()
-
+    var dataList : ArrayList<User> = arrayListOf(
+        User(id = "1", username = "홍길동", phNum = "0100101010"),
+        User(id = "2", username = "김길동", phNum = "0100101010"),
+        User(id = "3", username = "박길동", phNum = "0100101010"),
+        User(id = "4", username = "최길동", phNum = "0100101010")
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
@@ -36,9 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val add_photo_btn = findViewById<ImageButton>(R.id.btn_add_photo)
-
-
-        getContact()
 
         bottom_nav.setOnItemSelectedListener { item ->
 
