@@ -7,15 +7,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-class PhotoFragment : Fragment(), PhotoAdapter.ClickListener {
+class WishListFragment : Fragment(), WishListAdapter.ClickListener {
 
+    private lateinit var callback: OnBackPressedCallback
 
-    private lateinit var adapter: PhotoAdapter
+    private lateinit var adapter: WishListAdapter
     private val photoList: ArrayList<Uri> = ArrayList()
     private val sendList: ArrayList<String> = ArrayList()
     lateinit var mainActivity: MainActivity
@@ -24,6 +26,7 @@ class PhotoFragment : Fragment(), PhotoAdapter.ClickListener {
         super.onAttach(context)
 
         mainActivity = context as MainActivity
+
     }
 
     override fun onCreateView(
@@ -31,8 +34,7 @@ class PhotoFragment : Fragment(), PhotoAdapter.ClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        val view = inflater.inflate((R.layout.fragment_photo), container, false)
+        val view = inflater.inflate((R.layout.fragment_wishlist), container, false)
 
         if(arguments != null){
             val uris: ArrayList<String> = arguments?.getStringArrayList("img") as ArrayList<String>
@@ -52,7 +54,7 @@ class PhotoFragment : Fragment(), PhotoAdapter.ClickListener {
         val recyclerView = view.findViewById<RecyclerView>(R.id.photoView)
         recyclerView.layoutManager = GridLayoutManager(activity, 3)
         recyclerView.setHasFixedSize(true)
-        adapter = PhotoAdapter(photoList, this, mainActivity)
+        adapter = WishListAdapter(photoList, this, mainActivity)
         recyclerView.adapter = adapter
     }
 

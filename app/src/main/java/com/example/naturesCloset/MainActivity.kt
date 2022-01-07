@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val add_photo_btn = findViewById<ImageButton>(R.id.btn_add_photo)
+        val wish_items = findViewById<ImageView>(R.id.wishList)
 
         setSupportActionBar(binding.toolbar) //커스텀한 toolbar를 액션바로 사용
         supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                         binding.toolbarText.text = "My Profile"
                         binding.wishList.visibility=View.VISIBLE
                         intent.putExtra("ColorList", colorList)
-                        changeFragment(HomeFragment())
+                        changeFragment(ProfileFragment())
                     }
 
                     R.id.nav_contacts -> {
@@ -74,22 +75,22 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.nav_photo -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
-                        add_photo_btn.visibility = View.VISIBLE
-                        binding.wishList.visibility=View.INVISIBLE
-                        changeFragment(PhotoFragment())
-                        binding.toolbarText.text = "Wish lists"
-                    }
-
-                    else -> {
-                        bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
-
-                        changeFragment(GameFragment())
-
+                        binding.wishList.visibility=View.INVISIBLE
+                        changeFragment(PaletteFragment())
+                        binding.toolbarText.text = "Color your Clothes!"
                     }
                 }
             true
         }
+
+        binding.wishList.setOnClickListener {
+            add_photo_btn.visibility = View.VISIBLE
+            binding.wishList.visibility=View.VISIBLE
+            changeFragment(WishListFragment())
+            binding.toolbarText.text = "Wish lists"
+        }
+
         bottom_nav.selectedItemId = R.id.nav_home
 
 
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun changeFragment(fragment: Fragment) {
+    fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl_con, fragment).commit() //fl_con의 id를 가지는 Framelayout에 fragment 배치.
     }
 
@@ -124,6 +125,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -133,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
                 val fragmentManager: FragmentManager = supportFragmentManager
                 val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-                val photoFragment = PhotoFragment()
+                val photoFragment = WishListFragment()
                 val bundle = Bundle()
 
                 if(data!!.clipData != null){

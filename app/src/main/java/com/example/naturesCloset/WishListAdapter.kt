@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide
 
 
 
-class PhotoAdapter(private val photoList: ArrayList<Uri>, private val listener: ClickListener,
-                   val context: Context) : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>(){
+class WishListAdapter(private val photoList: ArrayList<Uri>, private val listener: ClickListener,
+                      val context: Context) : RecyclerView.Adapter<WishListAdapter.PhotoViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.wishlist_item, parent, false)
         return PhotoViewHolder(view)
     }
 

@@ -8,15 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.naturesCloset.databinding.FragmentHomeBinding
+import com.example.naturesCloset.databinding.FragmentPaletteBinding
 
-class GameFragment : Fragment(){
+class PaletteFragment : Fragment(){
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentPaletteBinding
 
     companion object{
         const val TAG : String = "로그"
-        fun newInstance(): GameFragment{
-            return GameFragment()
+        fun newInstance(): PaletteFragment{
+            return PaletteFragment()
         }
     }
 
@@ -42,8 +43,8 @@ class GameFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(HomeFragment.TAG, "HomeFragment - onCreateView() called")
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        Log.d(ProfileFragment.TAG, "HomeFragment - onCreateView() called")
+        binding = FragmentPaletteBinding.inflate(inflater, container, false)
         return binding.root
     }
 

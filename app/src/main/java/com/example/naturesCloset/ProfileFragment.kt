@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(){
+import com.example.naturesCloset.databinding.ActivityMainBinding
+
+
+class ProfileFragment : Fragment(){
     private lateinit var myColorAdapter: MyColorAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mbinding: ActivityMainBinding
 
     companion object{
         const val TAG : String = "로그"
-        fun newInstance(): HomeFragment{
-            return HomeFragment()
+        fun newInstance(): ProfileFragment{
+            return ProfileFragment()
         }
     }
 
