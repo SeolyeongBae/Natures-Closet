@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom"
-        android:padding="5dp"
+
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         >
 
@@ -37,7 +37,6 @@
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
 
-
             android:background="@drawable/round_corner"
             android:padding="10dp"
             android:scaleType="fitCenter"
@@ -48,8 +47,7 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_corner"
-            android:layout_margin="5dp"
+            android:background="@color/white"
             app:itemIconSize="30dp"
             app:itemIconTint="@drawable/item_selector"
             app:itemRippleColor="@android:color/transparent"

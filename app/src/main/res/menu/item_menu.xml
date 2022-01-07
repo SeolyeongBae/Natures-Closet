@@ -16,8 +16,4 @@
         android:title="Photo"
         android:icon="@drawable/ic_photo"/>
 
-    <item
-        android:id="@+id/nav_game"
-        android:title="Game"
-        android:icon="@drawable/ic_game"/>
 </menu>
