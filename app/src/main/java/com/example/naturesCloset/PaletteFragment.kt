@@ -65,7 +65,6 @@ class PaletteFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         Log.d(ProfileFragment.TAG, "HomeFragment - onCreateView() called")
         binding = FragmentPaletteBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,20 +75,17 @@ class PaletteFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         mDragListener = MyDragEventListener()
-        binding.shirt.setOnDragListener(mDragListener);
-        binding.color1.setOnLongClickListener(MyLongClickListener())
-
+        binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
+        binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
     }
 
 
     private class MyLongClickListener : OnLongClickListener {
         override fun onLongClick(view: View): Boolean {
-
-            val color = (view.background as ColorDrawable).color
+            val color = (view.background as ColorDrawable).color //color를 background에 있는 색상으로 결정한다. -> 고칠 수 있을 듯?
             val colorString = color.toString()
 
             val item = ClipData.Item(colorString)
-
 
             val dragData = ClipData(
                 colorString, arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), item
@@ -143,8 +139,6 @@ class PaletteFragment : Fragment(){
         init {
 
             val color = (v.background as ColorDrawable).color
-
-
             shadow = ColorDrawable(getDarkerColor(color))
         }
 
@@ -185,16 +179,15 @@ class PaletteFragment : Fragment(){
                 }
                 DragEvent.ACTION_DROP -> {
                     // Get the dragged data
-                    val item = event.clipData.getItemAt(0)
-                    val dragData = item.text as String
+                    val item = event.clipData.getItemAt(0) //클립보드에 복붙하는 방식인듯.
+                    val dragData = item.text as String //Dragdata가 보이지 않는 문제!
 
                     // Cast the receiver view as a TextView object
                     val v = view as ImageView
 
                     // Change the TextView text color as dragged object background color
-
+                    Log.d(TAG, dragData)
                     v.setColorFilter(Color.parseColor("#FFFFBCBC"), PorterDuff.Mode.MULTIPLY)
-
                     // Return true to indicate the dragged object dop
                     return true
                 }
