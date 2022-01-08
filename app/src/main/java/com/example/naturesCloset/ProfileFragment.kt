@@ -7,16 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
-class GameFragment : Fragment(){
+import com.example.naturesCloset.databinding.ActivityMainBinding
 
+
+class ProfileFragment : Fragment(){
+    private lateinit var myColorAdapter: MyColorAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mbinding: ActivityMainBinding
 
     companion object{
         const val TAG : String = "로그"
-        fun newInstance(): GameFragment{
-            return GameFragment()
+        fun newInstance(): ProfileFragment{
+            return ProfileFragment()
         }
     }
 
@@ -42,9 +48,28 @@ class GameFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(HomeFragment.TAG, "HomeFragment - onCreateView() called")
+        Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var list: ArrayList<Colors> =
+            requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
+        //list를 전달받는 과정이다.
+
+        myColorAdapter = MyColorAdapter(list)
+        binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+        Log.e("ContactsFragment", "Data List: ${list}")
+
+        // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
+        binding.listViewProfile.adapter = myColorAdapter
+
+
+    }
+
 
 }

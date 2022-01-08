@@ -4,10 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.MediaStore
+import android.view.Menu
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,15 +17,25 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.naturesCloset.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var images = ArrayList<String>()
     private val PICK_IMAGES_CODE = 0
 
-    var dataList : ArrayList<User> = arrayListOf()
+    var dataList : ArrayList<User> = arrayListOf(
+        User(id = "1", username = "홍길동", phNum = "0100101010"),
+        User(id = "2", username = "김길동", phNum = "0100101010"),
+        User(id = "3", username = "박길동", phNum = "0100101010"),
+        User(id = "4", username = "최길동", phNum = "0100101010")
+    )
 
+    var colorList : ArrayList<Colors> = arrayListOf(
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
@@ -36,9 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         val bottom_nav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val add_photo_btn = findViewById<ImageButton>(R.id.btn_add_photo)
+        val wish_items = findViewById<ImageView>(R.id.wishList)
 
-
-        getContact()
+        setSupportActionBar(binding.toolbar) //커스텀한 toolbar를 액션바로 사용
+        supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
 
         bottom_nav.setOnItemSelectedListener { item ->
 
@@ -46,31 +58,39 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_home -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
-                        changeFragment(HomeFragment())
+                        binding.toolbarText.text = "My Profile"
+                        binding.wishList.visibility=View.VISIBLE
+                        intent.putExtra("ColorList", colorList)
+                        changeFragment(ProfileFragment())
                     }
 
                     R.id.nav_contacts -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
+                        binding.wishList.visibility=View.INVISIBLE
                         changeFragment(ContactsFragment())
+                        binding.toolbarText.text = "Hello, User"
+                        intent.putExtra("DataList", dataList)
                     }
 
                     R.id.nav_photo -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
-                        add_photo_btn.visibility = View.VISIBLE
-                        changeFragment(PhotoFragment())
-                    }
-
-                    else -> {
-                        bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
-
-                        changeFragment(GameFragment())
-
+                        binding.wishList.visibility=View.INVISIBLE
+                        changeFragment(PaletteFragment())
+                        binding.toolbarText.text = "Color your Clothes!"
                     }
                 }
             true
         }
+
+        binding.wishList.setOnClickListener {
+            add_photo_btn.visibility = View.VISIBLE
+            binding.wishList.visibility=View.VISIBLE
+            changeFragment(WishListFragment())
+            binding.toolbarText.text = "Wish lists"
+        }
+
         bottom_nav.selectedItemId = R.id.nav_home
 
 
@@ -80,11 +100,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
 
 
-    private fun changeFragment(fragment: Fragment) {
+
+    fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl_con, fragment).commit() //fl_con의 id를 가지는 Framelayout에 fragment 배치.
-        intent.putExtra("DataList", dataList)
     }
 
     private fun pickImagesIntent(){
@@ -100,25 +124,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getContact(){
-        val contactList: MutableList<User> = ArrayList()
-        val contacts = contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        while (contacts!!.moveToNext()){
-            val name = contacts.getString(contacts.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-            val number = contacts.getString(contacts.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            val obj = User(username = name, phNum = number)
 
-            contactList.add(obj)
-        }
-        contacts.close()
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -129,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
                 val fragmentManager: FragmentManager = supportFragmentManager
                 val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-                val photoFragment = PhotoFragment()
+                val photoFragment = WishListFragment()
                 val bundle = Bundle()
 
                 if(data!!.clipData != null){
