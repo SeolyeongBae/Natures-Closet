@@ -82,6 +82,9 @@ class PaletteFragment : Fragment(){
         mDragListener = MyDragEventListener()
 
         binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
+        binding.pants.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
+
+
         binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
         binding.color2.setOnLongClickListener(MyLongClickListener())
         binding.color3.setOnLongClickListener(MyLongClickListener())
