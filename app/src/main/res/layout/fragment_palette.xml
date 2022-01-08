@@ -8,6 +8,15 @@
     android:background="@color/white"
     >
 
+    <ImageView
+        android:id="@+id/sampleImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/cat"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothMatch" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paletteSet"
         android:layout_width="match_parent"
@@ -39,7 +48,6 @@
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
                 android:background="#808000"
-
                 android:src="@drawable/rounded_drawable" />
 
             <ImageView

@@ -11,27 +11,28 @@ import com.example.naturesCloset.databinding.FragmentPaletteBinding
 import android.content.ClipDescription
 
 import android.content.ClipData
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Point
-import android.graphics.PorterDuff
+import android.graphics.*
 
 import android.graphics.drawable.ColorDrawable
 import android.widget.Toast
 
 import android.view.DragEvent
-
-import android.widget.TextView
-
 import android.graphics.drawable.Drawable
 import android.view.View.*
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.graphics.drawable.BitmapDrawable
+
+import android.graphics.Bitmap
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 
 class PaletteFragment : Fragment(){
 
+    public val pColors = Colors()
 
     private lateinit var binding: FragmentPaletteBinding
     private var mDragListener: MyDragEventListener? = null
@@ -74,16 +75,31 @@ class PaletteFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bitmap = (binding.sampleImg.getDrawable() as BitmapDrawable).bitmap
+
+        setPaletteColor(bitmap)
+
         mDragListener = MyDragEventListener()
+
         binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
         binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
+        binding.color2.setOnLongClickListener(MyLongClickListener())
+        binding.color3.setOnLongClickListener(MyLongClickListener())
+        binding.color4.setOnLongClickListener(MyLongClickListener())
+        binding.color5.setOnLongClickListener(MyLongClickListener())
+        binding.color6.setOnLongClickListener(MyLongClickListener())
+
     }
 
-
+    /* 여기부터 드래그&드롭, 색 바뀌는 코드 */
     private class MyLongClickListener : OnLongClickListener {
+
         override fun onLongClick(view: View): Boolean {
-            val color = (view.background as ColorDrawable).color //color를 background에 있는 색상으로 결정한다. -> 고칠 수 있을 듯?
-            val colorString = color.toString()
+
+            var draw: ColorDrawable = view.background as ColorDrawable
+            var color_id = draw.getColor()
+
+            val colorString = Integer.toHexString(color_id)
 
             val item = ClipData.Item(colorString)
 
@@ -186,8 +202,8 @@ class PaletteFragment : Fragment(){
                     val v = view as ImageView
 
                     // Change the TextView text color as dragged object background color
-                    Log.d(TAG, dragData)
-                    v.setColorFilter(Color.parseColor("#FFFFBCBC"), PorterDuff.Mode.MULTIPLY)
+                    Log.d("Here is Drop Data", dragData)
+                    v.setColorFilter(Color.parseColor("#"+dragData), PorterDuff.Mode.MULTIPLY)
                     // Return true to indicate the dragged object dop
                     return true
                 }
@@ -202,5 +218,38 @@ class PaletteFragment : Fragment(){
             return false
         }
     }
+
+    /*palatte API */
+
+
+    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()
+
+    // Set the background and text colors of a toolbar given a
+    // bitmap image to match
+
+    fun setPaletteColor(bitmap: Bitmap) {
+        // Generate the palette and get the vibrant swatch
+        val palette = createPaletteSync(bitmap)
+
+        val color: Int = Color.rgb(255, 255,255)
+
+        if(palette==null) return;
+
+        pColors.col1 = "#" + Integer.toHexString(palette.vibrantSwatch?.rgb?: color).substring(2)
+        pColors.col2 = "#" + Integer.toHexString(palette.darkVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.col3 = "#" + Integer.toHexString(palette.lightVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.col4 = "#" + Integer.toHexString(palette.mutedSwatch?.rgb ?: color).substring(2)
+        pColors.col5 = "#" + Integer.toHexString(palette.darkMutedSwatch?.rgb ?: color).substring(2)
+        pColors.col6 = "#" + Integer.toHexString(palette.lightMutedSwatch?.rgb ?: color).substring(2)
+
+        binding.color1.setBackgroundColor(Color.parseColor(pColors.col1))
+        binding.color2.setBackgroundColor(Color.parseColor(pColors.col2))
+        binding.color3.setBackgroundColor(Color.parseColor(pColors.col3))
+        binding.color4.setBackgroundColor(Color.parseColor(pColors.col4))
+        binding.color5.setBackgroundColor(Color.parseColor(pColors.col5))
+        binding.color6.setBackgroundColor(Color.parseColor(pColors.col6))
+
+    }
+
 
 }
