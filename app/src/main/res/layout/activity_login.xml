@@ -149,6 +149,7 @@
             android:layout_weight="5"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="24sp"
+            android:clickable="true"
             android:id="@+id/signUp"
             android:text="Sign Up"/>
     </LinearLayout>
