@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.nav_photo -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
-                        add_photo_btn.visibility = View.INVISIBLE
+                        add_photo_btn.visibility = View.VISIBLE
                         binding.wishList.visibility=View.INVISIBLE
                         changeFragment(PaletteFragment())
                         binding.toolbarText.text = "Color your Clothes!"
@@ -120,22 +120,19 @@ class MainActivity : AppCompatActivity() {
 
         startActivityForResult(Intent.createChooser(intent, "Select Image(s)"), PICK_IMAGES_CODE)
 //        startActivityForResult(intent, PICK_IMAGES_CODE)
-
-
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGES_CODE){
-            if(resultCode == Activity.RESULT_OK){
-                images.clear()
+                if (requestCode == PICK_IMAGES_CODE){
+                    if(resultCode == Activity.RESULT_OK){
+                        images.clear()
 
-                val fragmentManager: FragmentManager = supportFragmentManager
-                val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-                val photoFragment = WishListFragment()
+                        val fragmentManager: FragmentManager = supportFragmentManager
+                        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
+                val photoFragment = PaletteFragment()
                 val bundle = Bundle()
 
                 if(data!!.clipData != null){

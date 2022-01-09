@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.graphics.drawable.BitmapDrawable
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 
@@ -35,6 +36,7 @@ class PaletteFragment : Fragment(){
     public val pColors = Colors()
 
     private lateinit var binding: FragmentPaletteBinding
+    private val photoList: ArrayList<Uri> = ArrayList()
     private var mDragListener: MyDragEventListener? = null
 
     companion object{
@@ -68,6 +70,17 @@ class PaletteFragment : Fragment(){
     ): View? {
         Log.d(ProfileFragment.TAG, "HomeFragment - onCreateView() called")
         binding = FragmentPaletteBinding.inflate(inflater, container, false)
+
+        if(arguments != null){
+            val uris: ArrayList<String> = arguments?.getStringArrayList("img") as ArrayList<String>
+            for(i in 0 until (uris.size)){
+                photoList.add(Uri.parse(uris[i]))
+            }
+
+            val aPhoto = photoList[0] as Uri
+            binding.sampleImg.setImageURI(aPhoto)
+        }
+
         return binding.root
 
     }
