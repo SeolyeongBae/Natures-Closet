@@ -34,6 +34,9 @@ class PostActivity : AppCompatActivity(){
     private val colorlist: ArrayList<Colors> = ArrayList()
     lateinit var datas : ArrayList<Colors>
 
+    lateinit var contents: String
+    lateinit var hashtag: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,17 @@ class PostActivity : AppCompatActivity(){
 
         Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
         Log.d("ColorAdapter", data_id+" "+data_name+" "+data_phonenum)
+
+        binding.sharePost.setOnClickListener {
+
+            contents= binding.postContents.getText().toString()
+            hashtag = binding.postHashtags.getText().toString()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+
+        }
 
     }
 
