@@ -71,5 +71,7 @@ const db = mongoose.connection;
 db.once("open", () => {
     console.log("Successfully connected to MongoDB using Mongoose!!")
 })
+var api = require('./routes/api');
+app.use('/api',api);
 
 module.exports = app;
