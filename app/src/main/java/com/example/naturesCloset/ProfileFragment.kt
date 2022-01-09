@@ -15,7 +15,7 @@ import com.example.naturesCloset.databinding.FragmentHomeBinding
 import com.example.naturesCloset.databinding.ActivityMainBinding
 
 
-class ProfileFragment : Fragment(), ListAdapter.ClickListener {
+class ProfileFragment : Fragment() {
     private lateinit var myColorAdapter: MyColorAdapter
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mbinding: ActivityMainBinding
@@ -74,15 +74,6 @@ class ProfileFragment : Fragment(), ListAdapter.ClickListener {
     }
 
 
-    override fun onItemClick(position: Int) {
-        mainActivity?.let{
-            val intent = Intent(it, PostActivity::class.java)
-            intent.putExtra("colorList",list)
-            intent.putExtra("position", position)
-            it.startActivity(intent)
-        }
-//        Toast.makeText(mainActivity, "사진", Toast.LENGTH_SHORT).show()
-    }
 
 
 

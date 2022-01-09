@@ -7,29 +7,37 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
 
-class MyColorAdapter (private var list: MutableList<Colors>, private val listener: ClickListener): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
+class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
+
+    private val context = MyApplication.ApplicationContext() as Context
 
     // onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
-    inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
+    inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: Colors, position: Int) {
             val(data_id, data_name, data_phonenum, color2, color3, color4) = data
 
             Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
             Log.d("ColorAdapter", data_id+" "+data_name+" "+data_phonenum)
-        }
 
-        override fun onClick(v: View?) {
-            val position: Int = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+            var colorList : ArrayList<Colors> = arrayListOf(data)
+
+            itemView.setOnClickListener {
+                Intent(context, PostActivity::class.java).apply {
+                    putExtra("data", colorList)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    Log.d("ColorAdapter", "===== ===== ===== ===== intent data ===== ===== ===== =====") //로그 출력
+                }.run { context.startActivity(this) }
             }
+
+
         }
 
     }
@@ -56,9 +64,6 @@ class MyColorAdapter (private var list: MutableList<Colors>, private val listene
 
     }
 
-    interface ClickListener {
-        fun onItemClick(position: Int)
-    }
 
 
 }

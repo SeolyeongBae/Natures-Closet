@@ -1,5 +1,6 @@
 package com.example.naturesCloset
 
+import java.io.Serializable
 import java.util.*
 
 data class Colors(var col1:String?="",
@@ -9,4 +10,4 @@ data class Colors(var col1:String?="",
                  var col5:String?="",
                  var col6:String?=""
 
-)
+) : Serializable

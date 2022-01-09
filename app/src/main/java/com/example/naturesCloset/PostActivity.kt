@@ -32,6 +32,7 @@ class PostActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityPostBinding
     private val colorlist: ArrayList<Colors> = ArrayList()
+    lateinit var datas : ArrayList<Colors>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,17 @@ class PostActivity : AppCompatActivity(){
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        datas = intent.getSerializableExtra("data") as ArrayList<Colors>
+
+        val data = datas[0]
+
+        val(data_id, data_name, data_phonenum, color2, color3, color4) = data
+
+        Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
+        Log.d("ColorAdapter", data_id+" "+data_name+" "+data_phonenum)
+
     }
+
+
 
 }
