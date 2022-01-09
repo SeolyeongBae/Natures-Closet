@@ -59,9 +59,11 @@ server.listen(80, function(){
 });
 
 
+/* mongoose 연결 */
+
 const mongoose = require("mongoose");
 mongoose.connect(
-    "mongodb://localhost:27017/test_db",
+    "mongodb://localhost:27017/board",
     {useNewUrlParser: true}
 );
 const db = mongoose.connection;
@@ -69,8 +71,5 @@ const db = mongoose.connection;
 db.once("open", () => {
     console.log("Successfully connected to MongoDB using Mongoose!!")
 })
-
-
-
 
 module.exports = app;
