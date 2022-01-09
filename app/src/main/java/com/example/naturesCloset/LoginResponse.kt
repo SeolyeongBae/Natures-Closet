@@ -14,6 +14,7 @@ data class LoginResponse(
 */
 
 data class LoginResponse(
-    val code: String,
-    val msg: String
+    val status: String,
+    val msg: String,
+    val data: String
 )

@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
+            .baseUrl("http://192.249.18.163") // 주소는 본인의 서버 주소로 설정
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -79,12 +79,19 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    login = response.body()
-                    Log.d("LOGIN","msg : "+login?.msg)
-                    Log.d("LOGIN","code : "+login?.code)
-                    Log.d("LOGIN","============Login Success!!==========")
+                    var login = response.body()
+                    //Toast.makeText(getApplicationContext(),login?.status, Toast.LENGTH_SHORT).show()
+                    if (login?.status.equals("error") || login?.status.equals("false")) {
+                        //Toast.makeText(getApplicationContext(),"This account not exist!", Toast.LENGTH_SHORT).show()
+                        Log.d("LOGIN","============Login Failure!!==========")
+                    }
+                    else {
+                        startActivity(intent)
+                        Log.d("LOGIN","============Login Success!!==========")
+                        Log.d("LOGIN","msg : "+login?.msg)
+                        Log.d("LOGIN","code : "+login?.data)
+                    }
 
-                    startActivity(intent)
                 }
         })
 
