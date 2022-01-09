@@ -13,11 +13,9 @@ import com.github.chrisbanes.photoview.PhotoView
 class VpHolder(v : View) : RecyclerView.ViewHolder(v) {
 
     var photoImg : PhotoView
-
     init {
         photoImg = v.findViewById(R.id.vp_img)
     }
-
 
 }
 

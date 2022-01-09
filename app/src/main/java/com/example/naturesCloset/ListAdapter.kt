@@ -55,6 +55,7 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                     list[position].admin = false
                 }
             })
+
         }
 
     override fun onClick(v: View?) {

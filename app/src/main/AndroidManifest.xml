@@ -25,6 +25,9 @@
             android:name="com.example.naturesCloset.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.naturesCloset.PostActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.naturesCloset.MainActivity"
             android:exported="false" />
         <activity

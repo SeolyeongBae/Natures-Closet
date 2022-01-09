@@ -52,12 +52,10 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginBtn.setOnClickListener {
-
             Log.d("The email value", phone)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
@@ -87,7 +85,6 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
         })
-
         }
 
         binding.signUp.setOnClickListener {

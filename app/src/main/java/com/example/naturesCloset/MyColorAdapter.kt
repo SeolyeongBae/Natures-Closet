@@ -1,27 +1,37 @@
 package com.example.naturesCloset
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
 
-class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
+class MyColorAdapter (private var list: MutableList<Colors>, private val listener: ClickListener): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
 
     // onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
-    inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         fun bind(data: Colors, position: Int) {
             val(data_id, data_name, data_phonenum, color2, color3, color4) = data
 
             Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
             Log.d("ColorAdapter", data_id+" "+data_name+" "+data_phonenum)
-
         }
+
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+
     }
 
     // ViewHolder에게 item을 보여줄 View로 쓰일 item_data_list.xml를 넘기면서 ViewHolder 생성 -> binding
@@ -43,6 +53,11 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
 
         holder.bind(list[position], position)
         //ViewHolder의 bind method로 데이터를 넘긴다. 몇 번째 셀에 어떤 데이터를 넣을 지 관리한다.
+
+    }
+
+    interface ClickListener {
+        fun onItemClick(position: Int)
     }
 
 

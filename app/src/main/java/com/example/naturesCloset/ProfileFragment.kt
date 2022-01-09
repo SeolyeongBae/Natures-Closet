@@ -1,6 +1,7 @@
 package com.example.naturesCloset
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +15,13 @@ import com.example.naturesCloset.databinding.FragmentHomeBinding
 import com.example.naturesCloset.databinding.ActivityMainBinding
 
 
-class ProfileFragment : Fragment(){
+class ProfileFragment : Fragment(), ListAdapter.ClickListener {
     private lateinit var myColorAdapter: MyColorAdapter
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mbinding: ActivityMainBinding
+    var list: ArrayList<Colors> =ArrayList()
+
+    lateinit var mainActivity: MainActivity
 
     companion object{
         const val TAG : String = "로그"
@@ -33,13 +37,12 @@ class ProfileFragment : Fragment(){
 
     }
 
-
     // 프레그먼트를 안고 있는 액티비티에 붙었을 때
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d(TAG, "HomeFragment - onAttach() called")
+        mainActivity = context as MainActivity
     }
-
 
     //뷰 생성
     // fragment와 레이아웃 연결
@@ -56,8 +59,7 @@ class ProfileFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var list: ArrayList<Colors> =
-            requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
+        list = requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
         //list를 전달받는 과정이다.
 
         myColorAdapter = MyColorAdapter(list)
@@ -70,6 +72,18 @@ class ProfileFragment : Fragment(){
 
 
     }
+
+
+    override fun onItemClick(position: Int) {
+        mainActivity?.let{
+            val intent = Intent(it, PostActivity::class.java)
+            intent.putExtra("colorList",list)
+            intent.putExtra("position", position)
+            it.startActivity(intent)
+        }
+//        Toast.makeText(mainActivity, "사진", Toast.LENGTH_SHORT).show()
+    }
+
 
 
 }
