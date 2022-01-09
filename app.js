@@ -59,19 +59,4 @@ server.listen(80, function(){
 });
 
 
-/* mongoose 연결 */
-
-const mongoose = require("mongoose");
-mongoose.connect(
-    "mongodb://localhost:27017/board",
-    {useNewUrlParser: true}
-);
-const db = mongoose.connection;
-
-db.once("open", () => {
-    console.log("Successfully connected to MongoDB using Mongoose!!")
-})
-var api = require('./routes/api');
-app.use('/api',api);
-
 module.exports = app;
