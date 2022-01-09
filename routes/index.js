@@ -27,4 +27,11 @@ router.post('/join', function(req, res) {
    res.end();
 });
 
+router.post('/login', function(req, res) {
+  console.log('I got login request!');
+   console.log(req.body);
+   res.json({'code': '0000', 'msg': '로그인성공입니다.'})
+  res.end();
+});
+
 module.exports = router;
