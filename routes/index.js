@@ -16,22 +16,39 @@ router.get('/', function(req, res, next) {
 });
 
 
-
 /* POST home page. */
+var User = require('../models/user');
 
 /* Andorid에서 신규 회원 정보를 json 형식 으로 보내면 MongoDB로 Insert 함.
 /* Andorid code 부분 하단에 기술 */
 router.post('/join', function(req, res) {
-   console.log('I got request!');
-    console.log(req.body);
-   db.collection('user').insertOne(req.body); // name : 해당 DB에서 사용할 collection(table) 명
-   res.end();
+  var localEmail = req.body.email;
+  var localPassword = req.body.password;
+  var localName = req.body.name;
+  
+  User.create(
+    {
+      email: localEmail,
+      password: localPassword,
+      name: localName
+    },
+    function (error, savedDocument) {
+      if (error) console.log(error);
+      console.log(savedDocument);
+      console.log("sign up success!")
+    }
+  );
+
+  /*console.log('I got request!');
+  console.log(req.body);
+  db.collection('user').insertOne(req.body); // name : 해당 DB에서 사용할 collection(table) 명
+  res.end();*/
 });
 
 router.post('/login', function(req, res) {
   console.log('I got login request!');
-   console.log(req.body);
-   res.json({'code': '0000', 'msg': '로그인성공입니다.'})
+  console.log(req.body);
+  res.json({'code': '0000', 'msg': '로그인성공입니다.'})
   res.end();
 });
 
