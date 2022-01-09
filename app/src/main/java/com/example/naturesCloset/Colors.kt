@@ -2,11 +2,11 @@ package com.example.naturesCloset
 
 import java.util.*
 
-data class Colors(val col1:String="",
-                 val col2:String="",
-                 val col3:String="",
-                 val col4:String="",
-                 val col5:String="",
-                 val col6:String=""
+data class Colors(var col1:String?="",
+                 var col2:String?="",
+                 var col3:String?="",
+                 var col4:String?="",
+                 var col5:String?="",
+                 var col6:String?=""
 
 )
