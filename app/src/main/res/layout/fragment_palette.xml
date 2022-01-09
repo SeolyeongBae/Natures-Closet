@@ -8,6 +8,15 @@
     android:background="@color/white"
     >
 
+    <ImageView
+        android:id="@+id/sampleImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothMatch" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paletteSet"
         android:layout_width="match_parent"
@@ -26,6 +35,7 @@
         <LinearLayout
             android:id="@+id/colorPalette"
             android:layout_width="match_parent"
+            android:elevation="10dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,8 +49,7 @@
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
                 android:background="#808000"
-
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color2"
@@ -50,7 +59,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color3"
@@ -60,7 +69,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color4"
@@ -70,7 +79,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color5"
@@ -80,7 +89,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color6"
@@ -89,7 +98,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
         </LinearLayout>
 
@@ -117,15 +126,27 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
+            android:id="@+id/pants"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pants"
+
+            app:layout_constraintBottom_toBottomOf="@+id/body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
             android:id="@+id/shirt"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/shirt2"
+            android:src="@drawable/shirt"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/body" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

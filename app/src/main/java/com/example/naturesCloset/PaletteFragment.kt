@@ -11,27 +11,28 @@ import com.example.naturesCloset.databinding.FragmentPaletteBinding
 import android.content.ClipDescription
 
 import android.content.ClipData
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Point
-import android.graphics.PorterDuff
+import android.graphics.*
 
 import android.graphics.drawable.ColorDrawable
 import android.widget.Toast
 
 import android.view.DragEvent
-
-import android.widget.TextView
-
 import android.graphics.drawable.Drawable
 import android.view.View.*
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.graphics.drawable.BitmapDrawable
+
+import android.graphics.Bitmap
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 
 class PaletteFragment : Fragment(){
 
+    public val pColors = Colors()
 
     private lateinit var binding: FragmentPaletteBinding
     private var mDragListener: MyDragEventListener? = null
@@ -65,7 +66,6 @@ class PaletteFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         Log.d(ProfileFragment.TAG, "HomeFragment - onCreateView() called")
         binding = FragmentPaletteBinding.inflate(inflater, container, false)
         return binding.root
@@ -75,21 +75,36 @@ class PaletteFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bitmap = (binding.sampleImg.getDrawable() as BitmapDrawable).bitmap
+
+        setPaletteColor(bitmap)
+
         mDragListener = MyDragEventListener()
-        binding.shirt.setOnDragListener(mDragListener);
-        binding.color1.setOnLongClickListener(MyLongClickListener())
+
+        binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
+        binding.pants.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
+
+
+        binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
+        binding.color2.setOnLongClickListener(MyLongClickListener())
+        binding.color3.setOnLongClickListener(MyLongClickListener())
+        binding.color4.setOnLongClickListener(MyLongClickListener())
+        binding.color5.setOnLongClickListener(MyLongClickListener())
+        binding.color6.setOnLongClickListener(MyLongClickListener())
 
     }
 
-
+    /* 여기부터 드래그&드롭, 색 바뀌는 코드 */
     private class MyLongClickListener : OnLongClickListener {
+
         override fun onLongClick(view: View): Boolean {
 
-            val color = (view.background as ColorDrawable).color
-            val colorString = color.toString()
+            var draw: ColorDrawable = view.background as ColorDrawable
+            var color_id = draw.getColor()
+
+            val colorString = Integer.toHexString(color_id)
 
             val item = ClipData.Item(colorString)
-
 
             val dragData = ClipData(
                 colorString, arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), item
@@ -143,8 +158,6 @@ class PaletteFragment : Fragment(){
         init {
 
             val color = (v.background as ColorDrawable).color
-
-
             shadow = ColorDrawable(getDarkerColor(color))
         }
 
@@ -185,16 +198,15 @@ class PaletteFragment : Fragment(){
                 }
                 DragEvent.ACTION_DROP -> {
                     // Get the dragged data
-                    val item = event.clipData.getItemAt(0)
-                    val dragData = item.text as String
+                    val item = event.clipData.getItemAt(0) //클립보드에 복붙하는 방식인듯.
+                    val dragData = item.text as String //Dragdata가 보이지 않는 문제!
 
                     // Cast the receiver view as a TextView object
                     val v = view as ImageView
 
                     // Change the TextView text color as dragged object background color
-
-                    v.setColorFilter(Color.parseColor("#FFFFBCBC"), PorterDuff.Mode.MULTIPLY)
-
+                    Log.d("Here is Drop Data", dragData)
+                    v.setColorFilter(Color.parseColor("#"+dragData), PorterDuff.Mode.MULTIPLY)
                     // Return true to indicate the dragged object dop
                     return true
                 }
@@ -209,5 +221,38 @@ class PaletteFragment : Fragment(){
             return false
         }
     }
+
+    /*palatte API */
+
+
+    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()
+
+    // Set the background and text colors of a toolbar given a
+    // bitmap image to match
+
+    fun setPaletteColor(bitmap: Bitmap) {
+        // Generate the palette and get the vibrant swatch
+        val palette = createPaletteSync(bitmap)
+
+        val color: Int = Color.rgb(255, 255,255)
+
+        if(palette==null) return;
+
+        pColors.col1 = "#" + Integer.toHexString(palette.vibrantSwatch?.rgb?: color).substring(2)
+        pColors.col2 = "#" + Integer.toHexString(palette.darkVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.col3 = "#" + Integer.toHexString(palette.lightVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.col4 = "#" + Integer.toHexString(palette.mutedSwatch?.rgb ?: color).substring(2)
+        pColors.col5 = "#" + Integer.toHexString(palette.darkMutedSwatch?.rgb ?: color).substring(2)
+        pColors.col6 = "#" + Integer.toHexString(palette.lightMutedSwatch?.rgb ?: color).substring(2)
+
+        binding.color1.setBackgroundColor(Color.parseColor(pColors.col1))
+        binding.color2.setBackgroundColor(Color.parseColor(pColors.col2))
+        binding.color3.setBackgroundColor(Color.parseColor(pColors.col3))
+        binding.color4.setBackgroundColor(Color.parseColor(pColors.col4))
+        binding.color5.setBackgroundColor(Color.parseColor(pColors.col5))
+        binding.color6.setBackgroundColor(Color.parseColor(pColors.col6))
+
+    }
+
 
 }

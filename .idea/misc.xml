@@ -42,12 +42,13 @@
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/drawable/round_contacts_comp.xml" value="0.2625" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/drawable/round_corner.xml" value="0.2625" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/drawable/rounded_drawable.xml" value="0.2625" />
+        <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/activity_login.xml" value="0.18425925925925926" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/activity_photo.xml" value="0.536" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/contacts_data_list.xml" value="0.2" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/frag_contacts.xml" value="0.264" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/fragment_palette.xml" value="0.4" />
+        <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/fragment_palette.xml" value="0.176" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/fragment_photo.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/my_color_data_list.xml" value="0.2" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/layout/photo_item.xml" value="0.2" />
@@ -55,6 +56,8 @@
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/menu/item_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/menu/menu_search.xml" value="0.4" />
         <entry key="..\:/Users/SY Bae/Desktop/MadCamp/Project/Nature_closet/MiniApp/app/src/main/res/menu/toolbar_menu.xml" value="0.264" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_login.xml" value="0.2046875" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_main.xml" value="0.22192028985507245" />
       </map>
     </option>
   </component>
