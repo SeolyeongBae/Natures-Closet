@@ -23,8 +23,10 @@ import com.example.naturesCloset.classDirectory.Colors
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
 import com.example.naturesCloset.databinding.ActivityMainBinding
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
+import org.json.JSONObject
+import java.io.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class ProfileFragment : Fragment() {
@@ -66,7 +68,6 @@ class ProfileFragment : Fragment() {
         Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +76,10 @@ class ProfileFragment : Fragment() {
         list = requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
         //list를 전달받는 과정이다.
 
+        //data from server
+
+        binding.userProfileName.text = ""
+
         myColorAdapter = MyColorAdapter(list)
         binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
@@ -82,7 +87,6 @@ class ProfileFragment : Fragment() {
 
         // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
         binding.listViewProfile.adapter = myColorAdapter
-
         binding.profileImg.setOnClickListener {
             openGallery()
         }
@@ -119,6 +123,37 @@ class ProfileFragment : Fragment() {
             val res: Resources = resources
             val profileImageBase64 = Base64.encodeToString(byteArray, NO_WRAP)
             // 여기까지 인코딩 끝
+
+            //server 통신
+            val jsonOb = JSONObject()
+            jsonOb.put("userprof", profileImageBase64)
+
+            val url = URL("http://192.249.18.163/profedit")
+            var conn: HttpURLConnection? = null
+            conn = url.openConnection() as HttpURLConnection
+            conn.doOutput = true
+            conn.requestMethod = "POST" // POST로 요청
+            conn.setRequestProperty("Connection", "Keep-Alive") // Keep-Alive : 단일 TCP 소켓을 사용해서 다수의 요청과 응답을 처리
+            conn.setRequestProperty("Content-Type", "application/json") // Request Body 전달 시 json으로 서버에 전달
+
+            val jsonStr = jsonOb.toString() // json을 string으로 변환 후 서버로 보내야됨
+            val os: OutputStream = conn.getOutputStream()
+            os.write(jsonStr.toByteArray(charset("UTF-8"))) // 한글 깨짐 방지
+            os.flush()
+
+            val sb = StringBuilder()
+            val HttpResult = conn.getResponseCode()
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                val br = BufferedReader(
+                    InputStreamReader(conn.getInputStream(), "utf-8")
+                )
+
+                br.close()
+                println("" + sb.toString())
+            } else
+                System.out.println(conn.getResponseMessage())
+            os.close()
+            Log.d("json", "" + jsonStr)
 
             // 이미지 뷰에 선택한 이미지 출력
             binding.profileImg.setImageURI(currentImageURL)
