@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="20dp"
-            android:background="@color/light_white"
+            android:background="@color/white"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
@@ -59,7 +59,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color2"
@@ -67,7 +67,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color3"
@@ -75,7 +75,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color4"
@@ -83,7 +83,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color5"
@@ -91,14 +91,14 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color6"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
         </LinearLayout>
 

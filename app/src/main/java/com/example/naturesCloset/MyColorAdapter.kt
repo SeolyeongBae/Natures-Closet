@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.classDirectory.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
 
-class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
+class MyColorAdapter (private var list: MutableList<Colors>, var user : ArrayList<String>): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {
 
     private val context = MyApplication.ApplicationContext() as Context
 
@@ -28,6 +28,7 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
             itemView.setOnClickListener {
                 Intent(context, PostActivity::class.java).apply {
                     putExtra("data", colorList)
+                    putExtra("userdata", user)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     Log.d("ColorAdapter", "===== ===== ===== ===== intent data ===== ===== ===== =====") //로그 출력
                 }.run { context.startActivity(this) }

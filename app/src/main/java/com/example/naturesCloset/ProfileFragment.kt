@@ -102,7 +102,7 @@ class ProfileFragment : Fragment() {
                 Log.d("SHOW", colorlist.toString())
 
                 list = colorlist
-                myColorAdapter = MyColorAdapter(list)
+                myColorAdapter = MyColorAdapter(list, userProfile)
                 binding.listViewProfile.adapter = myColorAdapter
 
             }
@@ -113,7 +113,7 @@ class ProfileFragment : Fragment() {
         binding.userProfileName.text = ""
 
 
-        myColorAdapter = MyColorAdapter(list)
+        myColorAdapter = MyColorAdapter(list,  userProfile)
         binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         binding.userProfileName.text = userProfile[0]
