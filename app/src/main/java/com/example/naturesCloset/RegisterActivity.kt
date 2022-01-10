@@ -66,6 +66,7 @@ class RegisterActivity  : AppCompatActivity() {
                 jsonOb.put("userid", phone)   // phone : 전화번호(아이디) 입력값
                 jsonOb.put("userpw", pass) // pass  : 비밀번호 입력값
                 jsonOb.put("username", uname)   // uname : 이름 입력값
+                jsonOb.put("userprof", "init") //init: 기본 설정값
 
                 // /join으로 post방식 요청을 보내기 위해 설정
                 val url = URL("http://192.249.18.163/join")
