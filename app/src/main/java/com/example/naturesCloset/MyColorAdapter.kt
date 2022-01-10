@@ -1,17 +1,12 @@
 package com.example.naturesCloset
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.naturesCloset.Colors
+import com.example.naturesCloset.classDirectory.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
 
 class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapter<MyColorAdapter.ColorItemViewHolder> () {

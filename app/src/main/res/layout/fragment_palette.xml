@@ -12,8 +12,10 @@
         android:id="@+id/sampleImg"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/bal"
         android:gravity="center"
+        android:src="@drawable/bal"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clothMatch" />
 
@@ -150,27 +152,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/colorTitle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="색상 1"
-        android:textColor="#000000"
+        android:layout_weight="1"
+        android:ems="10"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:text="팔레트 이름을 입력하세요"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/paletteSet"
-
-        app:layout_constraintStart_toStartOf="@+id/paletteSet" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="77dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Button"
-        android:textSize="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/paletteSet"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/paletteSet"
+        />
 
     <Button
         android:id="@+id/saveBtn"

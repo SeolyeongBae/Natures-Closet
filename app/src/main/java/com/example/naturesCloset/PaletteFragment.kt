@@ -14,21 +14,17 @@ import android.content.ClipData
 import android.graphics.*
 
 import android.graphics.drawable.ColorDrawable
-import android.widget.Toast
 
 import android.view.DragEvent
 import android.graphics.drawable.Drawable
 import android.view.View.*
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.graphics.drawable.BitmapDrawable
 
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import com.example.naturesCloset.classDirectory.Colors
 
 
 class PaletteFragment : Fragment(){

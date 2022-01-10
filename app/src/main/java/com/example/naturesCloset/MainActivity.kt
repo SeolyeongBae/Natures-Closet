@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.naturesCloset.classDirectory.Colors
+import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     var colorList : ArrayList<Colors> = arrayListOf(
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
+        Colors(col1="aaa", col2="bbb", col3="ccc", col4="ddd", col5="1eee", col6="1fff"),
         Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
         Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
         Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
