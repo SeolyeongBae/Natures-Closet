@@ -24,18 +24,18 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
 
     fun bind(data: User, position: Int) {
 
-            val(data_id, data_name, data_phonenum) = data
+            val(username, color1, color2, color3, color4, color5, color6, content, hashtag) = data
 
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
-            Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)
+            //Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)
 
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
             var count : Int = 0
 
-            binding.contents.text = data_phonenum
-            binding.Username.text = data_name
-            binding.hashtag.text = data_phonenum.slice(IntRange(0,0)) //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
+            binding.contents.text = content
+            binding.Username.text = username
+            binding.hashtag.text = hashtag //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
 
             count = binding.likeNum.text.toString().toInt()
 

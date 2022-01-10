@@ -16,9 +16,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.naturesCloset.classDirectory.Colors
+import com.example.naturesCloset.classDirectory.FeedResponse
+import com.example.naturesCloset.classDirectory.PaletteResponse
 import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ActivityMainBinding
+import com.example.naturesCloset.serviceDirectory.GetFeedService
+import com.example.naturesCloset.serviceDirectory.ShowMyPaletteService
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,19 +35,36 @@ class MainActivity : AppCompatActivity() {
     private var images = ArrayList<String>()
     private val PICK_IMAGES_CODE = 0
 
-    var dataList : ArrayList<User> = arrayListOf(
-        User(id = "1", username = "홍길동", phNum = "0100101010"),
-        User(id = "2", username = "김길동", phNum = "0100101010"),
-        User(id = "3", username = "박길동", phNum = "0100101010"),
-        User(id = "4", username = "최길동", phNum = "0100101010")
-    )
-
+    var dataList : ArrayList<User> = arrayListOf()  // need for feed
     var colorList : ArrayList<Colors> = arrayListOf()
 
-
+    var share: FeedResponse? = null // need for feed
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
         super.onCreate(savedInstanceState)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.249.18.163:80")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var getFeedService: GetFeedService = retrofit.create(GetFeedService::class.java)
+
+        getFeedService.requestPalette("testname2").enqueue(object :
+            Callback<FeedResponse> {
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
+                Log.e("SHOW", "============Show Error!==========")
+            }
+
+            override fun onResponse(
+                call: Call<FeedResponse>,
+                response: Response<FeedResponse>
+            ) {
+                share = response.body()
+                Log.d("SHOW", "============Show Success!!==========")
+                dataList = share?.data!!
+                Log.d("SHOW", dataList.toString())
+            }
+        })
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
