@@ -107,8 +107,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl_con, fragment).commit() //fl_con의 id를 가지는 Framelayout에 fragment 배치.
     }
@@ -134,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
                         val fragmentManager: FragmentManager = supportFragmentManager
                         val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-                val photoFragment = PaletteFragment()
+                        val photoFragment = PaletteFragment()
                 val bundle = Bundle()
 
                 if(data!!.clipData != null){
