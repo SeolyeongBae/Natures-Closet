@@ -2,7 +2,6 @@ package com.example.naturesCloset
 
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.naturesCloset.ContactsFragment.Companion.TAG
+import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import java.util.Random
 
@@ -31,10 +31,13 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
 
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+            var count : Int = 0
 
             binding.contents.text = data_phonenum
             binding.Username.text = data_name
             binding.hashtag.text = data_phonenum.slice(IntRange(0,0)) //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
+
+            count = binding.likeNum.text.toString().toInt()
 
             binding.heartBtn.setOnClickListener(View.OnClickListener {
                 if(!list[position].admin){
@@ -44,6 +47,9 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                     }
                     animator.start()
                     list[position].admin = true
+
+                    count++
+                    binding.likeNum.text=count.toString()
                     Log.d(TAG, "Mainactivity - onClickbutton() Called")
                 }
                 else{
@@ -53,8 +59,13 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                     }
                     animator.start()
                     list[position].admin = false
+
+                    count--
+                    binding.likeNum.text=count.toString()
+
                 }
             })
+
         }
 
     override fun onClick(v: View?) {

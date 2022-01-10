@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ImageButton
@@ -14,6 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.naturesCloset.classDirectory.Colors
+import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -30,17 +33,12 @@ class MainActivity : AppCompatActivity() {
         User(id = "4", username = "최길동", phNum = "0100101010")
     )
 
-    var colorList : ArrayList<Colors> = arrayListOf(
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
-    )
+    var colorList : ArrayList<Colors> = arrayListOf()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
         super.onCreate(savedInstanceState)
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -52,6 +50,15 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar) //커스텀한 toolbar를 액션바로 사용
         supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
 
+        var userData : ArrayList<String> = intent!!.extras!!.get("LoginValue") as ArrayList<String>
+
+        Log.d("Main","msg : "+userData[0].toString())
+        Log.d("Main","msg : "+userData[1].toString())
+
+        colorList = arrayListOf(
+            Colors(palettename = "testset", color1="#ffffff", color2="#283860", color3="#283860", color4="#486088", color5="#ffffff", color6="#e8e0f0",username = userData)
+        )
+
         bottom_nav.setOnItemSelectedListener { item ->
 
             when(item.itemId){
@@ -61,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                         binding.toolbarText.text = "My Profile"
                         binding.wishList.visibility=View.VISIBLE
                         intent.putExtra("ColorList", colorList)
+                        intent.putExtra("UserData", userData)
                         changeFragment(ProfileFragment())
                     }
 
@@ -75,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.nav_photo -> {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
-                        add_photo_btn.visibility = View.INVISIBLE
+                        add_photo_btn.visibility = View.VISIBLE
                         binding.wishList.visibility=View.INVISIBLE
                         changeFragment(PaletteFragment())
                         binding.toolbarText.text = "Color your Clothes!"
@@ -105,8 +113,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fl_con, fragment).commit() //fl_con의 id를 가지는 Framelayout에 fragment 배치.
     }
@@ -120,22 +126,19 @@ class MainActivity : AppCompatActivity() {
 
         startActivityForResult(Intent.createChooser(intent, "Select Image(s)"), PICK_IMAGES_CODE)
 //        startActivityForResult(intent, PICK_IMAGES_CODE)
-
-
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGES_CODE){
-            if(resultCode == Activity.RESULT_OK){
-                images.clear()
+                if (requestCode == PICK_IMAGES_CODE){
+                    if(resultCode == Activity.RESULT_OK){
+                        images.clear()
 
-                val fragmentManager: FragmentManager = supportFragmentManager
-                val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-                val photoFragment = WishListFragment()
+                        val fragmentManager: FragmentManager = supportFragmentManager
+                        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
+                        val photoFragment = PaletteFragment()
                 val bundle = Bundle()
 
                 if(data!!.clipData != null){
