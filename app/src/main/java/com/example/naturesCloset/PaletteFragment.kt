@@ -99,7 +99,7 @@ class PaletteFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
+            .baseUrl("http://192.249.18.163:80") // 주소는 본인의 서버 주소로 설정
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var saveMyPaletteService: SaveMyPaletteService = retrofit.create(SaveMyPaletteService::class.java)
@@ -121,12 +121,12 @@ class PaletteFragment : Fragment(){
             saveMyPaletteService.requestLogin(
                 userProfile[0],
                 colorname,
-                pColors.col1,
-                pColors.col2,
-                pColors.col3,
-                pColors.col4,
-                pColors.col5,
-                pColors.col6,
+                pColors.color1,
+                pColors.color2,
+                pColors.color3,
+                pColors.color4,
+                pColors.color5,
+                pColors.color6,
                 mDragListener!!.upcolor,
                 mDragListener!!.downcolor
             ).enqueue(object :
@@ -150,10 +150,8 @@ class PaletteFragment : Fragment(){
 
         mDragListener = MyDragEventListener()
 
-
         binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
         binding.pants.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
-
 
         binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
         binding.color2.setOnLongClickListener(MyLongClickListener())
@@ -325,19 +323,19 @@ class PaletteFragment : Fragment(){
 
         if(palette==null) return;
 
-        pColors.col1 = "#" + Integer.toHexString(palette.vibrantSwatch?.rgb?: color).substring(2)
-        pColors.col2 = "#" + Integer.toHexString(palette.darkVibrantSwatch?.rgb ?: color).substring(2)
-        pColors.col3 = "#" + Integer.toHexString(palette.lightVibrantSwatch?.rgb ?: color).substring(2)
-        pColors.col4 = "#" + Integer.toHexString(palette.mutedSwatch?.rgb ?: color).substring(2)
-        pColors.col5 = "#" + Integer.toHexString(palette.darkMutedSwatch?.rgb ?: color).substring(2)
-        pColors.col6 = "#" + Integer.toHexString(palette.lightMutedSwatch?.rgb ?: color).substring(2)
+        pColors.color1 = "#" + Integer.toHexString(palette.vibrantSwatch?.rgb?: color).substring(2)
+        pColors.color2 = "#" + Integer.toHexString(palette.darkVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.color3 = "#" + Integer.toHexString(palette.lightVibrantSwatch?.rgb ?: color).substring(2)
+        pColors.color4 = "#" + Integer.toHexString(palette.mutedSwatch?.rgb ?: color).substring(2)
+        pColors.color5 = "#" + Integer.toHexString(palette.darkMutedSwatch?.rgb ?: color).substring(2)
+        pColors.color6 = "#" + Integer.toHexString(palette.lightMutedSwatch?.rgb ?: color).substring(2)
 
-        binding.color1.setBackgroundColor(Color.parseColor(pColors.col1))
-        binding.color2.setBackgroundColor(Color.parseColor(pColors.col2))
-        binding.color3.setBackgroundColor(Color.parseColor(pColors.col3))
-        binding.color4.setBackgroundColor(Color.parseColor(pColors.col4))
-        binding.color5.setBackgroundColor(Color.parseColor(pColors.col5))
-        binding.color6.setBackgroundColor(Color.parseColor(pColors.col6))
+        binding.color1.setBackgroundColor(Color.parseColor(pColors.color1))
+        binding.color2.setBackgroundColor(Color.parseColor(pColors.color2))
+        binding.color3.setBackgroundColor(Color.parseColor(pColors.color3))
+        binding.color4.setBackgroundColor(Color.parseColor(pColors.color4))
+        binding.color5.setBackgroundColor(Color.parseColor(pColors.color5))
+        binding.color6.setBackgroundColor(Color.parseColor(pColors.color6))
 
     }
 

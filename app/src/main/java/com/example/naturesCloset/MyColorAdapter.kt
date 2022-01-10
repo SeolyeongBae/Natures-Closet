@@ -43,13 +43,11 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
 
 
         }
-
     }
 
     // ViewHolder에게 item을 보여줄 View로 쓰일 item_data_list.xml를 넘기면서 ViewHolder 생성 -> binding
     // ViewHolder에 쓰일 Layout을 inflate하는 함수
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorItemViewHolder {
-
         val binding = MyColorDataListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ColorItemViewHolder(binding)
     }

@@ -20,11 +20,21 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.classDirectory.Colors
+import com.example.naturesCloset.classDirectory.LoginResponse
+import com.example.naturesCloset.classDirectory.PaletteResponse
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
 import com.example.naturesCloset.databinding.ActivityMainBinding
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
+import com.example.naturesCloset.serviceDirectory.ShowMyPaletteService
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class ProfileFragment : Fragment() {
@@ -32,6 +42,9 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mbinding: ActivityMainBinding
     var list: ArrayList<Colors> =ArrayList()
+    var share: PaletteResponse? = null
+    var colorname: String = ""
+    var colorlist: ArrayList<Colors> = arrayListOf<Colors>()
 
     lateinit var mainActivity: MainActivity
 
@@ -65,15 +78,33 @@ class ProfileFragment : Fragment() {
     ): View? {
         Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
 
-    }
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.249.18.163:80")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var showMyPaletteService: ShowMyPaletteService = retrofit.create(ShowMyPaletteService::class.java)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        showMyPaletteService.requestPalette("testname2").enqueue(object :
+            Callback<PaletteResponse> {
+            override fun onFailure(call: Call<PaletteResponse>, t: Throwable) {
+                Log.e("SHOW", "============Show Error!==========")
+            }
 
-        list = requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
-        //list를 전달받는 과정이다.
+            override fun onResponse(
+                call: Call<PaletteResponse>,
+                response: Response<PaletteResponse>
+            ) {
+                share = response.body()
+                Log.d("SHOW", "============Show Success!!==========")
+                colorlist = share?.data!!
+                Log.d("SHOW", colorlist.toString())
+            }
+        })
+
+        list = colorlist
+        Log.d("SHOW", "==========onviewcreated start==========")
+        binding.userProfileName.text = ""
 
         val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
@@ -86,12 +117,17 @@ class ProfileFragment : Fragment() {
 
         // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
         binding.listViewProfile.adapter = myColorAdapter
-
         binding.profileImg.setOnClickListener {
             openGallery()
         }
 
+        return binding.root
     }
+
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }*/
 
     private fun openGallery(){
         val intent = Intent(Intent.ACTION_PICK)
@@ -123,6 +159,37 @@ class ProfileFragment : Fragment() {
             val res: Resources = resources
             val profileImageBase64 = Base64.encodeToString(byteArray, NO_WRAP)
             // 여기까지 인코딩 끝
+
+            //server 통신
+            val jsonOb = JSONObject()
+            jsonOb.put("userprof", profileImageBase64)
+
+            val url = URL("http://192.249.18.163/profedit")
+            var conn: HttpURLConnection? = null
+            conn = url.openConnection() as HttpURLConnection
+            conn.doOutput = true
+            conn.requestMethod = "GET" // POST로 요청
+            conn.setRequestProperty("Connection", "Keep-Alive") // Keep-Alive : 단일 TCP 소켓을 사용해서 다수의 요청과 응답을 처리
+            conn.setRequestProperty("Content-Type", "application/json") // Request Body 전달 시 json으로 서버에 전달
+
+            val jsonStr = jsonOb.toString() // json을 string으로 변환 후 서버로 보내야됨
+            val os: OutputStream = conn.getOutputStream()
+            os.write(jsonStr.toByteArray(charset("UTF-8"))) // 한글 깨짐 방지
+            os.flush()
+
+            val sb = StringBuilder()
+            val HttpResult = conn.getResponseCode()
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                val br = BufferedReader(
+                    InputStreamReader(conn.getInputStream(), "utf-8")
+                )
+
+                br.close()
+                println("" + sb.toString())
+            } else
+                System.out.println(conn.getResponseMessage())
+            os.close()
+            Log.d("json", "" + jsonStr)
 
             // 이미지 뷰에 선택한 이미지 출력
             binding.profileImg.setImageURI(currentImageURL)

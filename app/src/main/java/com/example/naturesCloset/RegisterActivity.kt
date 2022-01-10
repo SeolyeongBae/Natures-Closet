@@ -1,9 +1,12 @@
 package com.example.naturesCloset
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -12,6 +15,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 import com.example.naturesCloset.databinding.ActivityRegisterBinding
+import java.io.ByteArrayOutputStream
 
 class RegisterActivity  : AppCompatActivity() {
 
@@ -53,9 +57,17 @@ class RegisterActivity  : AppCompatActivity() {
                 jsonOb.put("userid", phone)   // phone : 전화번호(아이디) 입력값
                 jsonOb.put("userpw", pass) // pass  : 비밀번호 입력값
                 jsonOb.put("username", uname)   // uname : 이름 입력값
+                //set initial image
+                val initProf = ResourcesCompat.getDrawable(resources, R.drawable.ic_launcher_background, null)
+                val bitmapDrawable = initProf as BitmapDrawable
+                val bitmap = bitmapDrawable.bitmap
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val bytes = stream.toByteArray()
+                jsonOb.put("userprof", java.util.Base64.getEncoder().encodeToString(bytes)) //init: 기본 설정값
 
                 // /join으로 post방식 요청을 보내기 위해 설정
-                val url = URL("http://192.249.18.165/join")
+                val url = URL("http://192.249.18.163/join")
                 var conn: HttpURLConnection? = null
                 conn = url.openConnection() as HttpURLConnection
                 conn.doOutput = true

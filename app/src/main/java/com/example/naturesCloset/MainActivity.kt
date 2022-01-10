@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
+            .baseUrl("http://192.249.18.163") // 주소는 본인의 서버 주소로 설정
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -61,22 +61,28 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    login = response.body()
+                    var login = response.body()
 
                     var str = login?.data.toString().substring(1)
                     val len = str.length-1
                     str = str.substring(0, len)
                     val userdata = str.split(",") as ArrayList<String>
 
-                    Log.d("LOGIN","msg : "+login?.msg)
-                    Log.d("LOGIN","code : "+login?.code)
-                    Log.d("LOGIN","code : "+userdata[0] )
-                    Log.d("LOGIN","code : "+userdata[1] )
-                    Log.d("LOGIN","============Login Success!!==========")
+                    //Toast.makeText(getApplicationContext(),login?.status, Toast.LENGTH_SHORT).show()
+                    if (login?.status.equals("error") || login?.status.equals("false")) {
+                        //Toast.makeText(getApplicationContext(),"This account not exist!", Toast.LENGTH_SHORT).show()
+                        Log.d("LOGIN","============Login Failure!!==========")
+                        Log.d("LOGIN","msg : "+login?.msg)
+                        Log.d("LOGIN","code : "+login?.data)
+                    }
+                    else {
+                        intent.putExtra("LoginValue", userdata )
+                        startActivity(intent)
+                        Log.d("LOGIN","============Login Success!!==========")
+                        Log.d("LOGIN","msg : "+login?.msg)
+                        Log.d("LOGIN","code : "+login?.data)
+                    }
 
-                    intent.putExtra("LoginValue", userdata )
-                    startActivity(intent)
-                    //intent.putExtra("loginValue", login?.data)
                 }
         })
         }
