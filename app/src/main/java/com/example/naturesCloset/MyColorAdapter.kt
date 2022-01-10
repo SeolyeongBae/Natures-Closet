@@ -18,7 +18,7 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
     inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: Colors, position: Int) {
-            val(col1, col2, col3, col4, col5, col6) = data
+            val(palettename ,col1, col2, col3, col4, col5, col6) = data
 
             Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
 

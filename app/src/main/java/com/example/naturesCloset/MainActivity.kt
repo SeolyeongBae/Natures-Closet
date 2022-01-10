@@ -33,10 +33,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     var colorList : ArrayList<Colors> = arrayListOf(
-        Colors(col1="aaa", col2="bbb", col3="ccc", col4="ddd", col5="1eee", col6="1fff"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
+        Colors(palettename = "test", color1="aaa", color2="bbb", color3="ccc", color4="ddd", color5="1eee", color6="1fff")
     )
 
 

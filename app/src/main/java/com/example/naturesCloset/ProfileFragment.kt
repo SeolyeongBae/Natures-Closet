@@ -78,11 +78,6 @@ class ProfileFragment : Fragment() {
     ): View? {
         Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.249.18.163:80")
@@ -90,7 +85,7 @@ class ProfileFragment : Fragment() {
             .build()
         var showMyPaletteService: ShowMyPaletteService = retrofit.create(ShowMyPaletteService::class.java)
 
-        showMyPaletteService.requestPalette(colorname).enqueue(object :
+        showMyPaletteService.requestPalette("testname2").enqueue(object :
             Callback<PaletteResponse> {
             override fun onFailure(call: Call<PaletteResponse>, t: Throwable) {
                 Log.e("SHOW", "============Show Error!==========")
@@ -103,14 +98,12 @@ class ProfileFragment : Fragment() {
                 share = response.body()
                 Log.d("SHOW", "============Show Success!!==========")
                 colorlist = share?.data!!
+                Log.d("SHOW", colorlist.toString())
             }
         })
 
         list = colorlist
-        //color list 설정
-
-        //data from server
-
+        Log.d("SHOW", "==========onviewcreated start==========")
         binding.userProfileName.text = ""
 
         myColorAdapter = MyColorAdapter(list)
@@ -124,7 +117,13 @@ class ProfileFragment : Fragment() {
             openGallery()
         }
 
+        return binding.root
     }
+
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }*/
 
     private fun openGallery(){
         val intent = Intent(Intent.ACTION_PICK)
