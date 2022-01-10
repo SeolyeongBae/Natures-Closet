@@ -71,7 +71,6 @@ class ContactsFragment : Fragment(){
         // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
         binding.listView.adapter = listAdapter
 
-
     }
 
 
