@@ -61,7 +61,7 @@ class PostActivity : AppCompatActivity(){
             contents= binding.postContents.getText().toString()
             hashtag = binding.postHashtags.getText().toString()
 
-            shareService.requestShare("testname", col1, col2, col3, col4, col5, col6, contents,hashtag).enqueue(object: Callback<LoginResponse> {
+            shareService.requestShare(userData[0], col1, col2, col3, col4, col5, col6, contents,hashtag).enqueue(object: Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("POST","============Post Error!==========")
                 }
