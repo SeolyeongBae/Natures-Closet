@@ -12,41 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@color/card_1"
         android:textSize="24sp"
         android:layout_marginBottom="16dp"
-        android:text="Sign Up"/>
+        android:text="SIGN UP"/>
 
     <ImageView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="200dp"
         android:background="@null"
-        android:src="@drawable/ic_shopping_bag"
+        android:src="@drawable/logo"
         android:gravity="center"
         android:layout_marginBottom="16dp"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Email"
+            android:hint="ID"
             android:id="@+id/TextInputEditText_email"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Username"
-            android:id="@+id/TextInputEditText_username"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,6 +52,18 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Username"
+            android:id="@+id/TextInputEditText_username"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_login"
@@ -69,6 +71,7 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@drawable/round_corner"
+        android:foreground="?attr/selectableItemBackground"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:weightSum="1"
