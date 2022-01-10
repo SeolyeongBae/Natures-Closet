@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.classDirectory.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
@@ -17,10 +18,10 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
     inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: Colors, position: Int) {
-            val(data_id, data_name, data_phonenum, color2, color3, color4) = data
+            val(pname, col1, col2, col3, col4, col5, col6) = data
 
             Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
-            Log.d("ColorAdapter", data_id+" "+data_name+" "+data_phonenum)
+            Log.d("ColorAdapter", pname+" "+col1+" "+col6)
 
             var colorList : ArrayList<Colors> = arrayListOf(data)
 
@@ -31,6 +32,14 @@ class MyColorAdapter (private var list: MutableList<Colors>): RecyclerView.Adapt
                     Log.d("ColorAdapter", "===== ===== ===== ===== intent data ===== ===== ===== =====") //로그 출력
                 }.run { context.startActivity(this) }
             }
+
+            binding.color1.setBackgroundColor(Color.parseColor(col1))
+            binding.color2.setBackgroundColor(Color.parseColor(col2))
+            binding.color3.setBackgroundColor(Color.parseColor(col3))
+            binding.color4.setBackgroundColor(Color.parseColor(col4))
+            binding.color5.setBackgroundColor(Color.parseColor(col5))
+            binding.color6.setBackgroundColor(Color.parseColor(col6))
+            binding.colorTitle.text = pname
 
 
         }

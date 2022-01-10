@@ -2,6 +2,7 @@ package com.example.naturesCloset
 
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 
@@ -35,7 +36,7 @@ class PostActivity : AppCompatActivity(){
 
         val data = datas[0]
 
-        val(col1, col2, col3, col4, col5, col6) = data
+        val(name, col1, col2, col3, col4, col5, col6, userData) = data
 
         Log.d("ColorAdapter", "===== ===== ===== ===== get data! ===== ===== ===== =====") //로그 출력
 
@@ -45,6 +46,14 @@ class PostActivity : AppCompatActivity(){
             .build()
 
         var shareService: ShareService = retrofit.create(ShareService::class.java)
+
+        //색 정해주기.
+        binding.color1.setBackgroundColor(Color.parseColor(col1))
+        binding.color2.setBackgroundColor(Color.parseColor(col2))
+        binding.color3.setBackgroundColor(Color.parseColor(col3))
+        binding.color4.setBackgroundColor(Color.parseColor(col4))
+        binding.color5.setBackgroundColor(Color.parseColor(col5))
+        binding.color6.setBackgroundColor(Color.parseColor(col6))
 
         binding.sharePost.setOnClickListener {
 
@@ -60,6 +69,7 @@ class PostActivity : AppCompatActivity(){
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     share = response.body()
                     Log.d("POST","============Post Success!!==========")
+                    intent.putExtra("LoginValue", userData)
                     startActivity(intent)
                 }
             })

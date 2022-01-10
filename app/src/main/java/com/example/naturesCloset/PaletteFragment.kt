@@ -105,6 +105,9 @@ class PaletteFragment : Fragment(){
         var saveMyPaletteService: SaveMyPaletteService = retrofit.create(SaveMyPaletteService::class.java)
 
 
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
+
+        //어디서받아오면 되는건가요!
 
         val bitmap = (binding.sampleImg.getDrawable() as BitmapDrawable).bitmap
 
@@ -116,7 +119,7 @@ class PaletteFragment : Fragment(){
             colorname = binding.colorTitle.getText().toString()
 
             saveMyPaletteService.requestLogin(
-                "testname",
+                userProfile[0],
                 colorname,
                 pColors.col1,
                 pColors.col2,
@@ -125,7 +128,7 @@ class PaletteFragment : Fragment(){
                 pColors.col5,
                 pColors.col6,
                 mDragListener!!.upcolor,
-                mDragListener!!.downcolor,
+                mDragListener!!.downcolor
             ).enqueue(object :
                 Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -137,13 +140,12 @@ class PaletteFragment : Fragment(){
                     response: Response<LoginResponse>
                 ) {
                     share = response.body()
-                    Log.d("LOGIN", "============Login Success!!==========")
+                    intent.putExtra("LoginValue", userProfile)
+                    Log.d("POST", "============Post Success!!==========")
                     startActivity(intent)
                 }
             })
         }
-
-
             setPaletteColor(bitmap)
 
         mDragListener = MyDragEventListener()

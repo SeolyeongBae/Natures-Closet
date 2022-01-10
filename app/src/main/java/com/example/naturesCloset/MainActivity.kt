@@ -33,12 +33,8 @@ class MainActivity : AppCompatActivity() {
         User(id = "4", username = "최길동", phNum = "0100101010")
     )
 
-    var colorList : ArrayList<Colors> = arrayListOf(
-        Colors(col1="aaa", col2="bbb", col3="ccc", col4="ddd", col5="1eee", col6="1fff"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1"),
-        Colors(col1="1", col2="1", col3="1", col4="1", col5="1", col6="1")
-    )
+    var colorList : ArrayList<Colors> = arrayListOf()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
@@ -59,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("Main","msg : "+userData[0].toString())
         Log.d("Main","msg : "+userData[1].toString())
+
+        colorList = arrayListOf(
+            Colors(palettename = "testset", col1="#ffffff", col2="#283860", col3="#283860", col4="#486088", col5="#ffffff", col6="#e8e0f0",username = userData)
+        )
 
         bottom_nav.setOnItemSelectedListener { item ->
 
