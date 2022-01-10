@@ -63,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
                     if (login?.status.equals("error") || login?.status.equals("false")) {
                         //Toast.makeText(getApplicationContext(),"This account not exist!", Toast.LENGTH_SHORT).show()
                         Log.d("LOGIN","============Login Failure!!==========")
+                        Log.d("LOGIN","msg : "+login?.msg)
+                        Log.d("LOGIN","code : "+login?.data)
                     }
                     else {
                         startActivity(intent)

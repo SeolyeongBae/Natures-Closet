@@ -40,7 +40,7 @@ class PostActivity : AppCompatActivity(){
         Log.d("ColorAdapter", "===== ===== ===== ===== get data! ===== ===== ===== =====") //로그 출력
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
+            .baseUrl("http://192.249.18.163") // 주소는 본인의 서버 주소로 설정
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

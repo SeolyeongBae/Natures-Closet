@@ -1,8 +1,7 @@
 package com.example.naturesCloset.classDirectory
 
-
-data class LoginResponse(
+class PaletteResponse (
     val status: String,
     val msg: String,
-    val data: Any
+    val data: ArrayList<Colors>
 )

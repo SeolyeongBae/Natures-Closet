@@ -64,6 +64,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_login.xml" value="0.2046875" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_main.xml" value="0.22192028985507245" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_photo.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_post.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/activity_register.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/contacts_data_list.xml" value="0.4" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/frag_contacts.xml" value="0.16666666666666666" />
@@ -71,6 +72,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/fragment_palette.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/fragment_wishlist.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/my_color_data_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Natures-Closet/app/src/main/res/layout/vp_photo_item.xml" value="0.13072916666666667" />
       </map>
     </option>
   </component>

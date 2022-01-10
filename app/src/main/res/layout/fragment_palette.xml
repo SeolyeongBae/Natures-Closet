@@ -160,7 +160,7 @@
         android:ems="10"
         android:textSize="16sp"
         android:inputType="textPersonName"
-        android:text="팔레트 이름을 입력하세요"
+        android:hint="팔레트 이름을 입력하세요"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/paletteSet"
         app:layout_constraintStart_toStartOf="@+id/paletteSet"

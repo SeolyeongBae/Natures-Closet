@@ -99,7 +99,7 @@ class PaletteFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.165") // 주소는 본인의 서버 주소로 설정
+            .baseUrl("http://192.249.18.163:80") // 주소는 본인의 서버 주소로 설정
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var saveMyPaletteService: SaveMyPaletteService = retrofit.create(SaveMyPaletteService::class.java)
@@ -116,7 +116,7 @@ class PaletteFragment : Fragment(){
             colorname = binding.colorTitle.getText().toString()
 
             saveMyPaletteService.requestLogin(
-                "testname",
+                "testname2",
                 colorname,
                 pColors.col1,
                 pColors.col2,
@@ -125,7 +125,7 @@ class PaletteFragment : Fragment(){
                 pColors.col5,
                 pColors.col6,
                 mDragListener!!.upcolor,
-                mDragListener!!.downcolor,
+                mDragListener!!.downcolor
             ).enqueue(object :
                 Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -137,7 +137,7 @@ class PaletteFragment : Fragment(){
                     response: Response<LoginResponse>
                 ) {
                     share = response.body()
-                    Log.d("LOGIN", "============Login Success!!==========")
+                    Log.d("POST", "============Post Success!!==========")
                     startActivity(intent)
                 }
             })
@@ -148,10 +148,8 @@ class PaletteFragment : Fragment(){
 
         mDragListener = MyDragEventListener()
 
-
         binding.shirt.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
         binding.pants.setOnDragListener(mDragListener) // 셔츠에 draglistener를 넣어둔다.
-
 
         binding.color1.setOnLongClickListener(MyLongClickListener()) //color1에 LongClickListener 를 넣어준다.
         binding.color2.setOnLongClickListener(MyLongClickListener())
