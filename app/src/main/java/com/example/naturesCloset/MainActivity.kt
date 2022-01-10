@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ImageButton
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar) //커스텀한 toolbar를 액션바로 사용
         supportActionBar?.setDisplayShowTitleEnabled(false) //액션바에 표시되는 제목의 표시유무를 설정합니다. false로 해야 custom한 툴바의 이름이 화면에 보이게 됩니다.
 
+        var userData : ArrayList<String> = intent!!.extras!!.get("LoginValue") as ArrayList<String>
+
+        Log.d("Main","msg : "+userData[0].toString())
+        Log.d("Main","msg : "+userData[1].toString())
+
         bottom_nav.setOnItemSelectedListener { item ->
 
             when(item.itemId){
@@ -63,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                         binding.toolbarText.text = "My Profile"
                         binding.wishList.visibility=View.VISIBLE
                         intent.putExtra("ColorList", colorList)
+                        intent.putExtra("UserData", userData)
                         changeFragment(ProfileFragment())
                     }
 

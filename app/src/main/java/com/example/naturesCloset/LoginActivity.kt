@@ -7,6 +7,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.naturesCloset.classDirectory.LoginResponse
 import com.example.naturesCloset.databinding.ActivityLoginBinding
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
 
             val intent = Intent(this, MainActivity::class.java)
+
             Log.d("SENTI", "onClick")
             phone= binding.TextInputEditTextEmail.getText().toString()
             pass = binding.TextInputEditTextPassword.getText().toString()
@@ -59,11 +62,21 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     login = response.body()
+
+                    var str = login?.data.toString().substring(1)
+                    val len = str.length-1
+                    str = str.substring(0, len)
+                    val userdata = str.split(",") as ArrayList<String>
+
                     Log.d("LOGIN","msg : "+login?.msg)
                     Log.d("LOGIN","code : "+login?.code)
+                    Log.d("LOGIN","code : "+userdata[0] )
+                    Log.d("LOGIN","code : "+userdata[1] )
                     Log.d("LOGIN","============Login Success!!==========")
 
+                    intent.putExtra("LoginValue", userdata )
                     startActivity(intent)
+                    //intent.putExtra("loginValue", login?.data)
                 }
         })
         }

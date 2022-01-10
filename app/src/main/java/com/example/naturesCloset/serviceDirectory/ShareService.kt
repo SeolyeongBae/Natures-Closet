@@ -10,7 +10,7 @@ interface ShareService{
 
     @FormUrlEncoded
     @POST("/share/") //Post로 보내자.
-    fun requestLogin(
+    fun requestShare(
         @Field("username") username:String,
         @Field("color1") color1:String,
         @Field("color2") color2:String,

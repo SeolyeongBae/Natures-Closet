@@ -242,8 +242,8 @@ class PaletteFragment : Fragment(){
 
     class MyDragEventListener : OnDragListener {
 
-        public var upcolor = "000000"
-        public var downcolor = "000000"
+        public var upcolor = "#000000"
+        public var downcolor = "#000000"
 
         override fun onDrag(view: View, event: DragEvent): Boolean {
             // Define the variable to store the action type for the incoming event
@@ -286,10 +286,10 @@ class PaletteFragment : Fragment(){
                     Log.d("Here is id of dropped view", clothes)
 
                     if(clothes == "shirt"){
-                        upcolor = dragData
+                        upcolor = "#"+dragData.substring(2)
                     }
                     else if(clothes == "pants"){
-                        downcolor = dragData
+                        downcolor = "#"+dragData.substring(2)
                     }
 
                     v.setColorFilter(Color.parseColor("#"+dragData), PorterDuff.Mode.MULTIPLY)

@@ -75,8 +75,12 @@ class ProfileFragment : Fragment() {
         list = requireActivity().intent!!.extras!!.get("ColorList") as ArrayList<Colors>
         //list를 전달받는 과정이다.
 
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
+
         myColorAdapter = MyColorAdapter(list)
         binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+        binding.userProfileName.text = userProfile[0]
 
         Log.e("ContactsFragment", "Data List: ${list}")
 
