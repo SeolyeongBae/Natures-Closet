@@ -4,12 +4,12 @@ import java.io.Serializable
 import java.util.*
 
 data class Colors(var palettename:String="",
-                  var col1:String="",
-                 var col2:String="",
-                 var col3:String="",
-                 var col4:String="",
-                 var col5:String="",
-                 var col6:String="",
+                  var color1:String="",
+                 var color2:String="",
+                 var color3:String="",
+                 var color4:String="",
+                 var color5:String="",
+                 var color6:String="",
                   var username : ArrayList<String> = arrayListOf()
 
 ) : Serializable

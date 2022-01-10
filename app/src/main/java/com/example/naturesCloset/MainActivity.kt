@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("Main","msg : "+userData[1].toString())
 
         colorList = arrayListOf(
-            Colors(palettename = "testset", col1="#ffffff", col2="#283860", col3="#283860", col4="#486088", col5="#ffffff", col6="#e8e0f0",username = userData)
+            Colors(palettename = "testset", color1="#ffffff", color2="#283860", color3="#283860", color4="#486088", color5="#ffffff", color6="#e8e0f0",username = userData)
         )
 
         bottom_nav.setOnItemSelectedListener { item ->
