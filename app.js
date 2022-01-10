@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 //필요한 부분 추가 필요
-var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user');
+var postRouter = require('./routes/post');
+var palletteRouter = require('./routes/pallette')
 
 var app = express();
 
@@ -19,7 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', userRouter);
+app.use('/', postRouter);
+app.use('/',palletteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

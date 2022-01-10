@@ -4,15 +4,18 @@ const { Int32 } = require("mongodb");
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var postSchema = new Schema({
+var palletteSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+  },
+  palettename: {
+      type: String,
+      required: true
   },
   color1: {
-    type: String,
-    required: true
+      type: String,
+      required: true
   },
   color2: {
     type: String,
@@ -34,14 +37,14 @@ var postSchema = new Schema({
     type: String,
     required: true
   },
-  contents: {
+  upcolor: {
     type: String,
     required: true
   },
-  hashtag: {
+  downcolor: {
     type: String,
     required: true
   }
 });
 
-module.exports = mongoose.model('post', postSchema);
+module.exports = mongoose.model('pallette', palletteSchema);
