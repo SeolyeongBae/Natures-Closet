@@ -1,4 +1,6 @@
-import com.example.naturesCloset.LoginResponse
+package com.example.naturesCloset.serviceDirectory
+
+import com.example.naturesCloset.classDirectory.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

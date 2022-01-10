@@ -2,7 +2,6 @@ package com.example.naturesCloset
 
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.naturesCloset.ContactsFragment.Companion.TAG
+import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import java.util.Random
 
@@ -55,6 +55,7 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                     list[position].admin = false
                 }
             })
+
         }
 
     override fun onClick(v: View?) {

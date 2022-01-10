@@ -40,7 +40,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
     <FrameLayout
         android:id="@+id/fl_con"
         android:layout_width="match_parent"

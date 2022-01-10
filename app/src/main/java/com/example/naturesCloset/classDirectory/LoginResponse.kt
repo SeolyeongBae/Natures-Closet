@@ -1,4 +1,4 @@
-package com.example.naturesCloset
+package com.example.naturesCloset.classDirectory
 
 /*
 data class LoginResponse(

@@ -9,15 +9,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import com.example.naturesCloset.databinding.FragContactsBinding
 
 
-class ContactsFragment : Fragment() {
+class ContactsFragment : Fragment(){
 
     private lateinit var listAdapter: ListAdapter
+    private val sendList: ArrayList<String> = ArrayList()
     private lateinit var hbinding: ContactsDataListBinding
-
+    var list: ArrayList<User> = ArrayList()
 
     private var _binding: FragContactsBinding? = null
     private val binding get() = _binding!!
@@ -58,8 +60,7 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var list: ArrayList<User> =
-            requireActivity().intent!!.extras!!.get("DataList") as ArrayList<User>
+        list= requireActivity().intent!!.extras!!.get("DataList") as ArrayList<User>
         //list를 전달받는 과정이다.
 
         listAdapter = ListAdapter(list)
@@ -72,11 +73,6 @@ class ContactsFragment : Fragment() {
 
 
     }
-
-
-
-
-
 
 
     }

@@ -1,29 +1,16 @@
 package com.example.naturesCloset
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.PersistableBundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.naturesCloset.databinding.ActivityLoginBinding
-import com.google.android.material.textfield.TextInputEditText
-import io.socket.client.IO
-import io.socket.client.Socket
-import io.socket.emitter.Emitter
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStream
 import java.net.HttpURLConnection
-import java.net.URISyntaxException
 import java.net.URL
-import android.text.Editable
 
-import android.text.TextWatcher
 import com.example.naturesCloset.databinding.ActivityRegisterBinding
 
 class RegisterActivity  : AppCompatActivity() {
