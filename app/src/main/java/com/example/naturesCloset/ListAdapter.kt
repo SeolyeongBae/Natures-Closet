@@ -24,7 +24,7 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
 
     fun bind(data: User, position: Int) {
 
-            val(username, color1, color2, color3, color4, color5, color6, content, hashtag) = data
+            val(username, color1, color2, color3, color4, color5, color6, content, hashtag, admin) = data
 
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
             //Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)

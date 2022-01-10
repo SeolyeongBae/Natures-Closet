@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface GetFeedService {
     @FormUrlEncoded
     @POST("/sharepost/") //Post로 보내자.
-    fun requestPalette(
+    fun requestFeed(
         @Field("username") username:String
     ) : Call<FeedResponse> //어떤 값을 받아올 지 정하는 부분
 

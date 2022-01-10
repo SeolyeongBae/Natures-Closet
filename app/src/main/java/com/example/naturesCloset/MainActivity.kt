@@ -43,29 +43,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { // 앱 최초 실행 시 수행
         super.onCreate(savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.249.18.163:80")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        var getFeedService: GetFeedService = retrofit.create(GetFeedService::class.java)
-
-        getFeedService.requestPalette("testname2").enqueue(object :
-            Callback<FeedResponse> {
-            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
-                Log.e("SHOW", "============Show Error!==========")
-            }
-
-            override fun onResponse(
-                call: Call<FeedResponse>,
-                response: Response<FeedResponse>
-            ) {
-                share = response.body()
-                Log.d("SHOW", "============Show Success!!==========")
-                dataList = share?.data!!
-                Log.d("SHOW", dataList.toString())
-            }
-        })
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
