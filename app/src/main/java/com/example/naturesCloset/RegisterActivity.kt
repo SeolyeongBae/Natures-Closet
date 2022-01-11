@@ -58,14 +58,15 @@ class RegisterActivity  : AppCompatActivity() {
                 jsonOb.put("userpw", pass) // pass  : 비밀번호 입력값
                 jsonOb.put("username", uname)   // uname : 이름 입력값
                 //set initial image
-                val initProf = ResourcesCompat.getDrawable(resources, R.drawable.ic_launcher_background, null)
-                val bitmapDrawable = initProf as BitmapDrawable
-                val bitmap = bitmapDrawable.bitmap
+                val initProf = ResourcesCompat.getDrawable(resources, R.drawable.ic_name_background, null)
+                // val bitmapDrawable = initProf as BitmapDrawable
+                //val bitmap = bitmapDrawable.bitmap
                 val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                //bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                 val bytes = stream.toByteArray()
-                jsonOb.put("userprof", java.util.Base64.getEncoder().encodeToString(bytes)) //init: 기본 설정값
+                //jsonOb.put("userprof", java.util.Base64.getEncoder().encodeToString(bytes)) //init: 기본 설정값
 
+                jsonOb.put("userprof", "Hello!")
                 // /join으로 post방식 요청을 보내기 위해 설정
                 val url = URL("http://192.249.18.163/join")
                 var conn: HttpURLConnection? = null

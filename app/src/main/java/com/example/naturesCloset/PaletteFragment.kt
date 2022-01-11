@@ -132,7 +132,7 @@ class PaletteFragment : Fragment(){
             ).enqueue(object :
                 Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.e("POST", "============Post Error!==========")
+                    Log.e("SAVE", "============Save Error!==========")
                 }
 
                 override fun onResponse(
@@ -141,7 +141,7 @@ class PaletteFragment : Fragment(){
                 ) {
                     share = response.body()
                     intent.putExtra("LoginValue", userProfile)
-                    Log.d("POST", "============Post Success!!==========")
+                    Log.d("SAVE", "============Save Success!!==========")
                     startActivity(intent)
                 }
             })

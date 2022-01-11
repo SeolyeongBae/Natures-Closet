@@ -78,6 +78,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.249.18.163:80")
@@ -85,7 +86,7 @@ class ProfileFragment : Fragment() {
             .build()
         var showMyPaletteService: ShowMyPaletteService = retrofit.create(ShowMyPaletteService::class.java)
 
-        showMyPaletteService.requestPalette("testname2").enqueue(object :
+        showMyPaletteService.requestPalette(userProfile[0]).enqueue(object :
             Callback<PaletteResponse> {
             override fun onFailure(call: Call<PaletteResponse>, t: Throwable) {
                 Log.e("SHOW", "============Show Error!==========")
@@ -99,6 +100,11 @@ class ProfileFragment : Fragment() {
                 Log.d("SHOW", "============Show Success!!==========")
                 colorlist = share?.data!!
                 Log.d("SHOW", colorlist.toString())
+
+                list = colorlist
+                myColorAdapter = MyColorAdapter(list, userProfile)
+                binding.listViewProfile.adapter = myColorAdapter
+
             }
         })
 
@@ -106,9 +112,8 @@ class ProfileFragment : Fragment() {
         Log.d("SHOW", "==========onviewcreated start==========")
         binding.userProfileName.text = ""
 
-        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
-        myColorAdapter = MyColorAdapter(list)
+        myColorAdapter = MyColorAdapter(list,  userProfile)
         binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         binding.userProfileName.text = userProfile[0]
@@ -171,6 +176,7 @@ class ProfileFragment : Fragment() {
             conn.requestMethod = "GET" // POST로 요청
             conn.setRequestProperty("Connection", "Keep-Alive") // Keep-Alive : 단일 TCP 소켓을 사용해서 다수의 요청과 응답을 처리
             conn.setRequestProperty("Content-Type", "application/json") // Request Body 전달 시 json으로 서버에 전달
+
 
             val jsonStr = jsonOb.toString() // json을 string으로 변환 후 서버로 보내야됨
             val os: OutputStream = conn.getOutputStream()
