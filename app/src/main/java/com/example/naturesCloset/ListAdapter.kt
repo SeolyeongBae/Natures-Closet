@@ -7,34 +7,28 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.naturesCloset.ContactsFragment.Companion.TAG
 import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
-import androidx.viewbinding.ViewBinding;
-import com.example.naturesCloset.databinding.MyColorDataListBinding
 import java.util.Random
 
 
 class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
 
-// onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
-    inner class ListItemViewHolder(v : View, private val binding: ContactsDataListBinding): RecyclerView.ViewHolder(v), View.OnClickListener{
+    // onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
+    inner class ListItemViewHolder(private val binding: ContactsDataListBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
-    val likebtn : LottieAnimationView = binding.heartBtn
+        val likebtn : LottieAnimationView = binding.heartBtn
 
 
-    //val bal6 = v.findViewById(R.id.bal6) as ImageView
-    //val v_id = v.getResources().getResourceName(bal1.getId()).toString()
-
-    fun bind(data: User, position: Int) {
+        fun bind(data: User, position: Int) {
 
             val(username, color1, color2, color3, color4, color5, color6, content, hashtag, admin) = data
 
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
-            Log.d("ListAdapter", color1+" "+color4+" "+color6)
+            //Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)
 
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
@@ -45,10 +39,13 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
             binding.hashtag.text = hashtag //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
 
             count = binding.likeNum.text.toString().toInt()
-            //val clothes = v_id.split("/")[1]
-            //Log.d("ListAdapter", clothes+" ")
 
-            //bal6.setColorFilter(Color.parseColor(color6), PorterDuff.Mode.MULTIPLY)
+            binding.bal1.setColorFilter(Color.parseColor(color1), PorterDuff.Mode.MULTIPLY)
+            binding.bal2.setColorFilter(Color.parseColor(color2), PorterDuff.Mode.MULTIPLY)
+            binding.bal3.setColorFilter(Color.parseColor(color3), PorterDuff.Mode.MULTIPLY)
+            binding.bal4.setColorFilter(Color.parseColor(color4), PorterDuff.Mode.MULTIPLY)
+            binding.bal5.setColorFilter(Color.parseColor(color5), PorterDuff.Mode.MULTIPLY)
+            binding.bal6.setColorFilter(Color.parseColor(color6), PorterDuff.Mode.MULTIPLY)
 
             binding.heartBtn.setOnClickListener(View.OnClickListener {
                 if(!list[position].admin){
@@ -79,11 +76,11 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
 
         }
 
-    override fun onClick(v: View?) {
-        val position: Int = adapterPosition
-        if(position != RecyclerView.NO_POSITION) {
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+            }
         }
-    }
 
     }
 
@@ -96,9 +93,8 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder { //ListItemViewHolder 형식으로 리턴.
 
         val binding = ContactsDataListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.contacts_data_list, parent, false)
 
-        return ListItemViewHolder(view, binding)
+        return ListItemViewHolder(binding)
     }
 
     override fun getItemViewType(position: Int): Int {
