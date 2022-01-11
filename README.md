@@ -337,8 +337,8 @@ router.post('/show', function(req,res) {
 ## 3. Client / Android
 
  **1. Flowchart**
-    
-    ![Untitled Diagram drawio](https://user-images.githubusercontent.com/80435616/148944367-dcfb1f50-30d8-4e7a-951f-848e81764b59.png)
+앱의 구조를 담은 flowchart다.     
+<img src="https://user-images.githubusercontent.com/80435616/148944367-dcfb1f50-30d8-4e7a-951f-848e81764b59.png">
     
 
  **2. LoginActivity & RegisterActivity**
@@ -357,11 +357,15 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 - SHARE 기능 : 유저가 제작한 팔레트를 공유할 수 있다. 공유하지 않은 팔레트는 유저 프로필에 담겨 있다. recyclerview에 담겨 있는 item을 누르면 PostActivity로 넘어간다.
 - PostActivity에서는 글의 제목, 글에 넣을 Hashtag을 작성할 수 있다. 우측 상단의 화살표를 누르면 share 할 수 있다.
 
+<img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945684-53061299-62a0-40f9-9a4f-990f8a9fe6cd.gif">
+
  **4. TAB 2: Today’s Color**
 - 탭 상단 ’Hello’ 다음 유저 닉네임이 표시된다.
 - Profile 탭에서 유저들이 공유했던 팔레트 색상이 풍선 위에 입혀져 표시된다.
 - Instagram과 유사하게 유저명, 게시글 내용, 해시태그가 표시된다.
 - Heart를 누르면 lottie 애니메이션이 재생되면서 숫자가 증가한다.
+
+<img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945690-598a3814-3c9c-43b7-8cd4-a38312e60587.gif">
 
  **5. TAB 3: Palette** 
 - Palette API 라이브러리를 사용해서 사진에서 대표 색 6개를 추출한 뒤 화면에 표시한다.
@@ -369,3 +373,5 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 - Drag&Drop을 사용했다. 띄워진 color를 가져가서 옷 위에 drop하면 옷에 색상이 입혀진다.
 - 상단에 palette의 이름을 입력할 수 있다.
 - Save를 누르면 입은 옷의 색, 팔레트의 색이 저장되고 이는 profile에서 조회할 수 있다.
+
+<img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945698-f6f5b87e-cec7-4788-8361-db3cf91b8faf.gif"><img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945699-d1be200a-80e0-4ad3-8a43-92232463a18a.gif"><img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945693-4d8d5a6f-f0e2-492d-b42a-0f60cd27b1b5.gif">
