@@ -94,20 +94,21 @@ class ContactsFragment : Fragment(){
                 list = dataList
                 listAdapter = ListAdapter(list)
                 binding.listView.adapter = listAdapter
+                binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
             }
         })
 
-        list = dataList
+        //list = dataList
         //list를 전달받는 과정이다.
 
-        listAdapter = ListAdapter(list)
-        binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        //listAdapter = ListAdapter(list)
+        //binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         Log.e("ContactsFragment", "Data List: ${list}")
 
         // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
-        binding.listView.adapter = listAdapter
+        //binding.listView.adapter = listAdapter
 
     }
 
