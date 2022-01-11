@@ -13,14 +13,12 @@ import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import java.util.Random
 
-
 class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
 
 // onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
     inner class ListItemViewHolder(private val binding: ContactsDataListBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
     val likebtn : LottieAnimationView = binding.heartBtn
-
 
     fun bind(data: User, position: Int) {
 
@@ -117,7 +115,6 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                 holder.likebtn.progress= it.animatedValue as Float
             }
         }
-
 
     }
 
