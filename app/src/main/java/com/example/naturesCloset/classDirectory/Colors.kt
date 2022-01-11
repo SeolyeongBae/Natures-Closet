@@ -10,6 +10,8 @@ data class Colors(var palettename:String="",
                  var color4:String="",
                  var color5:String="",
                  var color6:String="",
+                  var upcolor:String="",
+                  var downcolor:String="",
                   var username : ArrayList<String> = arrayListOf()
 
 ) : Serializable

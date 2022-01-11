@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                         bottom_nav.itemIconTintList = ContextCompat.getColorStateList(this, R.color.color_home)
                         add_photo_btn.visibility = View.INVISIBLE
                         binding.toolbarText.text = "My Profile"
-                        binding.wishList.visibility=View.VISIBLE
                         intent.putExtra("ColorList", colorList)
                         intent.putExtra("UserData", userData)
                         changeFragment(ProfileFragment())
