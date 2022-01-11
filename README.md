@@ -375,3 +375,9 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 - Save를 누르면 입은 옷의 색, 팔레트의 색이 저장되고 이는 profile에서 조회할 수 있다.
 
 <img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945698-f6f5b87e-cec7-4788-8361-db3cf91b8faf.gif"><img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945699-d1be200a-80e0-4ad3-8a43-92232463a18a.gif"><img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148945693-4d8d5a6f-f0e2-492d-b42a-0f60cd27b1b5.gif">
+
+
+---
+## Contacts
+박종준 pjjkey@kaist.ac.kr
+배설영 seolyeongbae@gm.gist.ac.kr
