@@ -380,4 +380,5 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 ---
 ## Contacts
 박종준 pjjkey@kaist.ac.kr
+</br>
 배설영 seolyeongbae@gm.gist.ac.kr
