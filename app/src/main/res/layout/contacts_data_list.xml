@@ -175,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="18dp"
+                android:textColor="@color/light_white"
                 android:text="#hashtag"
                 android:textSize="12sp"
 
@@ -202,7 +203,7 @@
                 android:layout_marginTop="11dp"
                 android:layout_marginRight="20dp"
 
-                android:text="12"
+                android:text="0"
                 android:textSize="12sp"
 
                 app:layout_constraintRight_toRightOf="parent"

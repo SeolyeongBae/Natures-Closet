@@ -8,26 +8,34 @@
     android:background="@color/white"
     >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PREVIEW"
+        app:layout_constraintBottom_toTopOf="@+id/sampleImg"
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp"
+        android:elevation="10dp"
         android:gravity="center"
         android:src="@drawable/round_img"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clothMatch" />
 
     <ImageView
         android:id="@+id/sampleImg"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
+        android:elevation="11dp"
         android:gravity="center"
         android:src="@drawable/bal"
-        android:elevation="11dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clothMatch" />
 
