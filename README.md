@@ -272,47 +272,76 @@ module.exports = router;
 
 ```
 
-### (4) keep
-
-- POST 즐겨찾기 추가
-- DELETE 즐겨찾기 삭제
-
 ### Collection 3: Palettes
 
+- API 구성: palette instance 생성을 위한 save, my palette를 보기 위한 show로 구성되어 있다.
+
 ```
-// keep/:member_seq/:info_seq
-router.delete('/:member_seq/:info_seq', function(request, response, next){
+router.post('/save', function(req, res) {
+    var localName = req.body.username;
+    var localPalname = req.body.palettename;
+    var localColor1 = req.body.color1;
+    var localColor2 = req.body.color2;
+    var localColor3 = req.body.color3;
+    var localColor4 = req.body.color4;
+    var localColor5 = req.body.color5;
+    var localColor6 = req.body.color6;
+    var localUpcol = req.body.upcolor;
+    var localDowncol = req.body.downcolor;
 
-    var member_seq = request.params.member_seq;
-    var info_seq = request.body.info_seq;
+    Palettes.create(
+        {
+            name: localName,
+            palettename: localPalname,
+            color1: localColor1,
+            color2: localColor2,
+            color3: localColor3,
+            color4: localColor4,
+            color5: localColor5,
+            color6: localColor6,
+            upcolor: localUpcol,
+            downcolor: localDowncol
+        },
+        function (error, savedDocument) {
+            console.log("I got save request");
+            if (error) console.log(error);
+            console.log(savedDocument);
+            console.log("posting success!");
+          }
+    );
 
-    var sql_delete = "delete from bestfood_keep where member_seq = ? and info_seq = ?";
-    var sql_update = "update bestfood_info set keep_cnt = keep_cnt-1 where seq = ?";
+});
 
-    db.get().query(sql_delete, [member_seq, info_seq], function(err, rows){
-        if(err){
-            console.log("sql_delete");
-            return response.sendStatus(400);
-        }
-        db.get().query(sql_update, [info_seq], function(err, rows){
-            if(err){
-                console.log("sql_update");
-                return response.sendStatus(400);
+router.post('/show', function(req,res) {
+    var localUser = req.body.username;
+    console.log(localUser);
+
+    Palettes.find( {name: localUser}, 'palettename color1 color2 color3 color4 color5 color6 upcolor downcolor -_id', 
+        function(err,docs) {
+            console.log("I got show request");
+            if (err) {
+                console.log(err);
+                return res.json({ 'status': 'false', 'msg': 'error occurred', 'data':'nodata' });
             }
-        })
-    })
+            else {
+                console.log("request success!");
+                console.log(docs)
+                return res.json({ 'status': 'true', 'msg': 'results:', 'data': docs });
+            }
+        });
 });
 
 ```
 
+
 ## 3. Client / Android
 
-1. Flowchart
+ **1. Flowchart**
     
     ![Untitled Diagram drawio](https://user-images.githubusercontent.com/80435616/148944367-dcfb1f50-30d8-4e7a-951f-848e81764b59.png)
     
 
-1. LoginActivity & RegisterActivity
+ **2. LoginActivity & RegisterActivity**
 
 LoginActivity : 기존 등록된 정보로 Login한다. Sign up을 누르면 RegisterActivity로 이동한다.
 
@@ -320,7 +349,7 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 
 <img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148944507-97bbde0d-051a-4b13-b56d-87f8b9f96c37.png"><img width="250" alt="logo" src="https://user-images.githubusercontent.com/80435616/148944510-27847863-986f-43ad-ab4d-f1adf03ce7b6.png">
 
-1. TAB 1: Profile
+ **3. TAB 1: Profile**
 
 프로필 사진, 유저 닉네임, 유저가 제작한 팔레트 및 코디가 보인다. 
 
@@ -328,13 +357,13 @@ RegisterActivity : 회원가입을 할 수 있다. Username, Userid, Userpwd를 
 - SHARE 기능 : 유저가 제작한 팔레트를 공유할 수 있다. 공유하지 않은 팔레트는 유저 프로필에 담겨 있다. recyclerview에 담겨 있는 item을 누르면 PostActivity로 넘어간다.
 - PostActivity에서는 글의 제목, 글에 넣을 Hashtag을 작성할 수 있다. 우측 상단의 화살표를 누르면 share 할 수 있다.
 
-1. TAB 2: Today’s Color
+ **4. TAB 2: Today’s Color**
 - 탭 상단 ’Hello’ 다음 유저 닉네임이 표시된다.
 - Profile 탭에서 유저들이 공유했던 팔레트 색상이 풍선 위에 입혀져 표시된다.
 - Instagram과 유사하게 유저명, 게시글 내용, 해시태그가 표시된다.
 - Heart를 누르면 lottie 애니메이션이 재생되면서 숫자가 증가한다.
 
-1. TAB 3: Palette 
+ **5. TAB 3: Palette** 
 - Palette API 라이브러리를 사용해서 사진에서 대표 색 6개를 추출한 뒤 화면에 표시한다.
 - 하단 사진 추가 버튼을 누르면 갤러리에서 원하는 사진을 가져올 수 있다.
 - Drag&Drop을 사용했다. 띄워진 color를 가져가서 옷 위에 drop하면 옷에 색상이 입혀진다.
