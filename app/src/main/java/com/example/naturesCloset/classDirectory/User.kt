@@ -2,13 +2,14 @@ package com.example.naturesCloset.classDirectory
 
 import java.util.*
 
-data class User(val id:String="",
-                val phNum:String="",
-                val username:String="",
-                val active:Boolean=true,
-                var admin:Boolean=false,
-                val infect:Int=0,
-                val createdAt: Date=Date(),
-                val updatedAt: Date=Date()
-
+data class User(var name:String="",
+                var color1:String="",
+                var color2:String="",
+                var color3:String="",
+                var color4:String="",
+                var color5:String="",
+                var color6:String="",
+                var contents:String="",
+                var hashtag:String="",
+                var admin:Boolean=false
 )
