@@ -2,6 +2,7 @@ package com.example.naturesCloset
 
 import android.animation.ValueAnimator
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,31 +14,37 @@ import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import java.util.Random
 
-
 class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<ListAdapter.ListItemViewHolder> () {
 
-// onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
+    // onBindViewHolder의 역할을 대신한다, View와 데이터를 연결시키는 함수
     inner class ListItemViewHolder(private val binding: ContactsDataListBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
-    val likebtn : LottieAnimationView = binding.heartBtn
+        val likebtn : LottieAnimationView = binding.heartBtn
 
 
-    fun bind(data: User, position: Int) {
+        fun bind(data: User, position: Int) {
 
-            val(data_id, data_name, data_phonenum) = data
+            val(username, color1, color2, color3, color4, color5, color6, content, hashtag, admin) = data
 
             Log.d("ListAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
-            Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)
+            //Log.d("ListAdapter", data_id+" "+data_name+" "+data_phonenum)
 
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
             var count : Int = 0
 
-            binding.contents.text = data_phonenum
-            binding.Username.text = data_name
-            binding.hashtag.text = data_phonenum.slice(IntRange(0,0)) //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
+            binding.contents.text = content
+            binding.Username.text = username
+            binding.hashtag.text = hashtag //이게 여기에 있어서 매번 main에 호출될때마다 불려나오는 것 같다
 
             count = binding.likeNum.text.toString().toInt()
+
+            binding.bal1.setColorFilter(Color.parseColor(color1), PorterDuff.Mode.MULTIPLY)
+            binding.bal2.setColorFilter(Color.parseColor(color2), PorterDuff.Mode.MULTIPLY)
+            binding.bal3.setColorFilter(Color.parseColor(color3), PorterDuff.Mode.MULTIPLY)
+            binding.bal4.setColorFilter(Color.parseColor(color4), PorterDuff.Mode.MULTIPLY)
+            binding.bal5.setColorFilter(Color.parseColor(color5), PorterDuff.Mode.MULTIPLY)
+            binding.bal6.setColorFilter(Color.parseColor(color6), PorterDuff.Mode.MULTIPLY)
 
             binding.heartBtn.setOnClickListener(View.OnClickListener {
                 if(!list[position].admin){
@@ -68,11 +75,11 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
 
         }
 
-    override fun onClick(v: View?) {
-        val position: Int = adapterPosition
-        if(position != RecyclerView.NO_POSITION) {
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+            }
         }
-    }
 
     }
 
@@ -117,7 +124,6 @@ class ListAdapter (private var list: MutableList<User>): RecyclerView.Adapter<Li
                 holder.likebtn.progress= it.animatedValue as Float
             }
         }
-
 
     }
 

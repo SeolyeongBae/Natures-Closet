@@ -9,9 +9,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.naturesCloset.classDirectory.FeedResponse
 import com.example.naturesCloset.classDirectory.User
 import com.example.naturesCloset.databinding.ContactsDataListBinding
 import com.example.naturesCloset.databinding.FragContactsBinding
+import com.example.naturesCloset.serviceDirectory.GetFeedService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class ContactsFragment : Fragment(){
@@ -20,6 +27,8 @@ class ContactsFragment : Fragment(){
     private val sendList: ArrayList<String> = ArrayList()
     private lateinit var hbinding: ContactsDataListBinding
     var list: ArrayList<User> = ArrayList()
+    var share: FeedResponse?= null
+    var dataList: ArrayList<User> = arrayListOf()
 
     private var _binding: FragContactsBinding? = null
     private val binding get() = _binding!!
@@ -59,17 +68,47 @@ class ContactsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
-        list= requireActivity().intent!!.extras!!.get("DataList") as ArrayList<User>
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.249.18.163:80")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var getFeedService: GetFeedService = retrofit.create(GetFeedService::class.java)
+
+        getFeedService.requestFeed(userProfile[0]).enqueue(object :
+            Callback<FeedResponse> {
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
+                Log.e("SHOW", "============Show Error!==========")
+            }
+
+            override fun onResponse(
+                call: Call<FeedResponse>,
+                response: Response<FeedResponse>
+            ) {
+                share = response.body()
+                Log.d("SHOW", "============Show Success!!==========")
+                dataList = share?.data!!
+                Log.d("SHOW", dataList.toString())
+                //async 처리
+                list = dataList
+                listAdapter = ListAdapter(list)
+                binding.listView.adapter = listAdapter
+                binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+            }
+        })
+
+        //list = dataList
         //list를 전달받는 과정이다.
 
-        listAdapter = ListAdapter(list)
-        binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        //listAdapter = ListAdapter(list)
+        //binding.listView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         Log.e("ContactsFragment", "Data List: ${list}")
 
         // Fragment에서 전달받은 list를 넘기면서 Adapter 생성
-        binding.listView.adapter = listAdapter
+        //binding.listView.adapter = listAdapter
 
     }
 

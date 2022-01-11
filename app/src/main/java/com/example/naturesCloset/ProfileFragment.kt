@@ -20,11 +20,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.classDirectory.Colors
+import com.example.naturesCloset.classDirectory.EditResponse
 import com.example.naturesCloset.classDirectory.LoginResponse
 import com.example.naturesCloset.classDirectory.PaletteResponse
 import com.example.naturesCloset.databinding.FragmentHomeBinding
 
 import com.example.naturesCloset.databinding.ActivityMainBinding
+import com.example.naturesCloset.serviceDirectory.EditProfileService
 import com.example.naturesCloset.serviceDirectory.ShowMyPaletteService
 import org.json.JSONObject
 import retrofit2.Call
@@ -78,6 +80,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         Log.d(TAG, "HomeFragment - onCreateView() called")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.249.18.163:80")
@@ -85,7 +88,7 @@ class ProfileFragment : Fragment() {
             .build()
         var showMyPaletteService: ShowMyPaletteService = retrofit.create(ShowMyPaletteService::class.java)
 
-        showMyPaletteService.requestPalette("testname2").enqueue(object :
+        showMyPaletteService.requestPalette(userProfile[0]).enqueue(object :
             Callback<PaletteResponse> {
             override fun onFailure(call: Call<PaletteResponse>, t: Throwable) {
                 Log.e("SHOW", "============Show Error!==========")
@@ -99,6 +102,11 @@ class ProfileFragment : Fragment() {
                 Log.d("SHOW", "============Show Success!!==========")
                 colorlist = share?.data!!
                 Log.d("SHOW", colorlist.toString())
+
+                list = colorlist
+                myColorAdapter = MyColorAdapter(list, userProfile)
+                binding.listViewProfile.adapter = myColorAdapter
+
             }
         })
 
@@ -106,12 +114,13 @@ class ProfileFragment : Fragment() {
         Log.d("SHOW", "==========onviewcreated start==========")
         binding.userProfileName.text = ""
 
-        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
 
-        myColorAdapter = MyColorAdapter(list)
+        myColorAdapter = MyColorAdapter(list,  userProfile)
         binding.listViewProfile.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         binding.userProfileName.text = userProfile[0]
+        var imagebytes = Base64.decode(userProfile[1],0)
+        binding.profileImg.setImageBitmap(BitmapFactory.decodeByteArray(imagebytes, 0, imagebytes.size))
 
         Log.e("ContactsFragment", "Data List: ${list}")
 
@@ -140,6 +149,8 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
 
+        val userProfile = requireActivity().intent!!.extras!!.get("UserData") as ArrayList<String>
+
         if (requestCode == 102 && resultCode == Activity.RESULT_OK){
             var currentImageURL = intent?.data
             // Base64 인코딩부분
@@ -155,49 +166,33 @@ class ProfileFragment : Fragment() {
             val byteArrayOutputStream = ByteArrayOutputStream()
             resized.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
             val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-            val outStream = ByteArrayOutputStream()
-            val res: Resources = resources
             val profileImageBase64 = Base64.encodeToString(byteArray, NO_WRAP)
             // 여기까지 인코딩 끝
 
             //server 통신
-            val jsonOb = JSONObject()
-            jsonOb.put("userprof", profileImageBase64)
+            //retrofit
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://192.249.18.163:80")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            var editProfileService: EditProfileService = retrofit.create(EditProfileService::class.java)
 
-            val url = URL("http://192.249.18.163/profedit")
-            var conn: HttpURLConnection? = null
-            conn = url.openConnection() as HttpURLConnection
-            conn.doOutput = true
-            conn.requestMethod = "GET" // POST로 요청
-            conn.setRequestProperty("Connection", "Keep-Alive") // Keep-Alive : 단일 TCP 소켓을 사용해서 다수의 요청과 응답을 처리
-            conn.setRequestProperty("Content-Type", "application/json") // Request Body 전달 시 json으로 서버에 전달
+            editProfileService.requestEdit(userProfile[0],profileImageBase64).enqueue(object :
+                Callback<EditResponse> {
+                override fun onFailure(call: Call<EditResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("SHOW", "============Profedit Error!==========")
+                }
+                override fun onResponse(
+                    call: Call<EditResponse>,
+                    response: Response<EditResponse>
+                ) {
+                    Log.d("SHOW", "============Profedit Success!!==========")
 
-            val jsonStr = jsonOb.toString() // json을 string으로 변환 후 서버로 보내야됨
-            val os: OutputStream = conn.getOutputStream()
-            os.write(jsonStr.toByteArray(charset("UTF-8"))) // 한글 깨짐 방지
-            os.flush()
-
-            val sb = StringBuilder()
-            val HttpResult = conn.getResponseCode()
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
-                val br = BufferedReader(
-                    InputStreamReader(conn.getInputStream(), "utf-8")
-                )
-
-                br.close()
-                println("" + sb.toString())
-            } else
-                System.out.println(conn.getResponseMessage())
-            os.close()
-            Log.d("json", "" + jsonStr)
-
-            // 이미지 뷰에 선택한 이미지 출력
+                }
+            })
             binding.profileImg.setImageURI(currentImageURL)
-            try {
-                //이미지 선택 후 처리
-            }catch (e: Exception){
-                e.printStackTrace()
-            }
+
         } else{
             Log.d("ActivityResult", "something wrong")
         }

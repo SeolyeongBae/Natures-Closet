@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
 
             Log.d("SENTI", "onClick")
-            phone= binding.TextInputEditTextEmail.getText().toString()
+            phone = binding.TextInputEditTextEmail.getText().toString()
             pass = binding.TextInputEditTextPassword.getText().toString()
 
             loginService.requestLogin(phone,pass).enqueue(object: Callback<LoginResponse>{
@@ -66,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
                     var str = login?.data.toString().substring(1)
                     val len = str.length-1
                     str = str.substring(0, len)
+
                     val userdata = str.split(",") as ArrayList<String>
 
                     //Toast.makeText(getApplicationContext(),login?.status, Toast.LENGTH_SHORT).show()

@@ -35,21 +35,61 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="20dp"
-            android:background="@color/light_white"
+            android:background="@color/white"
             android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clothMatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/Imgv"
+            app:layout_constraintEnd_toEndOf="@+id/Imgv"
+            app:layout_constraintTop_toTopOf="@+id/Imgv">
+
+            <ImageView
+                android:id="@+id/body"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/chrac_body"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/pants"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/pants"
+
+                app:layout_constraintBottom_toBottomOf="@+id/body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/shirt"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/shirt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/body" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/colorPalette"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_marginLeft="20dp"
-
+            android:layout_marginRight="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -59,7 +99,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color2"
@@ -67,7 +107,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color3"
@@ -75,7 +115,19 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/colorPalette2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/colorPalette">
 
             <ImageView
                 android:id="@+id/color4"
@@ -83,7 +135,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color5"
@@ -91,14 +143,14 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
             <ImageView
                 android:id="@+id/color6"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:gravity="center_horizontal"
-                android:src="@drawable/rounded_drawable" />
+                android:src="@drawable/circle_frame" />
 
         </LinearLayout>
 
@@ -119,10 +171,10 @@
             android:id="@+id/shareBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="@+id/Imgv">
 
             <TextView
                 android:id="@+id/share"

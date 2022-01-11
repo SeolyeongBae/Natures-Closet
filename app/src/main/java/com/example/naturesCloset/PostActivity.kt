@@ -22,6 +22,7 @@ class PostActivity : AppCompatActivity(){
     private lateinit var binding: ActivityPostBinding
     private val colorlist: ArrayList<Colors> = ArrayList()
     lateinit var datas : ArrayList<Colors>
+    lateinit var userData : ArrayList<String>
     var share: LoginResponse? = null
 
     lateinit var contents: String
@@ -33,10 +34,12 @@ class PostActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         datas = intent.getSerializableExtra("data") as ArrayList<Colors>
+        userData = intent.getSerializableExtra("userdata") as ArrayList<String>
+
 
         val data = datas[0]
 
-        val(name, col1, col2, col3, col4, col5, col6, userData) = data
+        val(name, col1, col2, col3, col4, col5, col6) = data
 
         Log.d("ColorAdapter", "===== ===== ===== ===== get data! ===== ===== ===== =====") //로그 출력
 

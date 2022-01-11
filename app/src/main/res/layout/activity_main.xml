@@ -15,10 +15,10 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white">
 
         <TextView
             android:id="@+id/toolbar_text"
@@ -27,16 +27,17 @@
             android:layout_gravity="center|left"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/wishList"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
+            android:layout_marginBottom="16dp"
             android:layout_marginRight="30dp"
-            android:visibility="invisible"
-            android:src="@drawable/ic_shopping_bag" />
+            android:src="@drawable/ic_shopping_bag"
+            android:visibility="invisible" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -62,12 +63,13 @@
 
         <ImageButton
             android:id="@+id/btn_add_photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="30dp"
             android:layout_gravity="right"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="60dp"
             android:adjustViewBounds="true"
+            android:elevation = "5dp"
 
             android:background="@drawable/round_corner"
             android:padding="10dp"
