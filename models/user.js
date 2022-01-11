@@ -19,26 +19,9 @@ var userSchema = new Schema({
     unique: true
   },
   profile: {
-    type: String
+    type: String,
+    required: true,
   }
-  /*
-  userinfo: {
-    type: [{
-      color1: 
-      color2:
-      color3:
-      color4:
-      color5:
-      color6:
-      picture: 
-    }]
-  }
-
-  */
-  //making below by using a list type 
-  //color field 1~6
-  //profile figure
-  //
 });
 
 module.exports = mongoose.model('user', userSchema);

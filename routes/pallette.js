@@ -61,7 +61,7 @@ router.post('/show', function(req,res) {
     var localUser = req.body.username;
     console.log(localUser);
 
-    Palettes.find( {name: localUser}, 'palettename color1 color2 color3 color4 color5 color6 -_id', 
+    Palettes.find( {name: localUser}, 'palettename color1 color2 color3 color4 color5 color6 upcolor downcolor -_id', 
         function(err,docs) {
             console.log("I got show request");
             if (err) {

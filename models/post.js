@@ -8,7 +8,6 @@ var postSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
   },
   color1: {
     type: String,

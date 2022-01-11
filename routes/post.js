@@ -42,6 +42,7 @@ router.post('/share', function(req, res) {
             color6:localColor6,
             contents:localContents,
             hashtag:localHashtag
+
         },
         function (error, savedDocument) {
             if (error) console.log(error);

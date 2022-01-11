@@ -30,7 +30,7 @@ router.post('/join', function(req, res) {
   var localEmail = req.body.userid;
   var localPassword = req.body.userpw;
   var localName = req.body.username;
-  var localProf = req.body.userprof;
+  var localProfile = req.body.profile;
   
   Users.create(
     {
@@ -54,6 +54,10 @@ router.post('/profedit', function(req, res) {
 
   Users.findOneAndUpdate({ name: localName }, { profile: localProf }, {
     new: true
+  }, function (err,result) {
+    console.log("I got modify request");
+    if (err) console.log(err);
+    else console.log(result);
   });
 });
 
