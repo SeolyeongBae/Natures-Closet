@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                         add_photo_btn.visibility = View.INVISIBLE
                         binding.wishList.visibility=View.INVISIBLE
                         changeFragment(ContactsFragment())
-                        binding.toolbarText.text = "Hello, User"
+                        binding.toolbarText.text = "Hello, " + userData[0]
                         intent.putExtra("DataList", dataList)
                     }
 

@@ -58,7 +58,7 @@ class RegisterActivity  : AppCompatActivity() {
                 jsonOb.put("userpw", pass) // pass  : 비밀번호 입력값
                 jsonOb.put("username", uname)   // uname : 이름 입력값
                 //set initial image
-                val initProf = ResourcesCompat.getDrawable(resources, R.drawable.ic_launcher_background, null)
+                val initProf = ResourcesCompat.getDrawable(resources, R.drawable.ic_name_background, null)
                 // val bitmapDrawable = initProf as BitmapDrawable
                 //val bitmap = bitmapDrawable.bitmap
                 val stream = ByteArrayOutputStream()
