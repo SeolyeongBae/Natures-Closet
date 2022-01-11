@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naturesCloset.classDirectory.Colors
 import com.example.naturesCloset.databinding.MyColorDataListBinding
@@ -18,7 +19,7 @@ class MyColorAdapter (private var list: MutableList<Colors>, var user : ArrayLis
     inner class ColorItemViewHolder(private val binding: MyColorDataListBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: Colors, position: Int) {
-            val(pname, col1, col2, col3, col4, col5, col6) = data
+            val(pname, col1, col2, col3, col4, col5, col6, upcol, downcol) = data
 
             Log.d("ColorAdapter", "===== ===== ===== ===== bind ===== ===== ===== =====") //로그 출력
             Log.d("ColorAdapter", pname+" "+col1+" "+col6)
@@ -41,6 +42,9 @@ class MyColorAdapter (private var list: MutableList<Colors>, var user : ArrayLis
             binding.color5.setBackgroundColor(Color.parseColor(col5))
             binding.color6.setBackgroundColor(Color.parseColor(col6))
             binding.colorTitle.text = pname
+
+            binding.shirt.setColorFilter(Color.parseColor(upcol), PorterDuff.Mode.MULTIPLY)
+            binding.pants.setColorFilter(Color.parseColor(downcol), PorterDuff.Mode.MULTIPLY)
 
 
         }
