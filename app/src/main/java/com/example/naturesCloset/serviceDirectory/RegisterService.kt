@@ -13,7 +13,8 @@ interface RegisterService {
     fun requestLogin(
         @Field("userid") userid:String,
         @Field("userpw") userpw:String,
-        @Field("username") username:String
+        @Field("username") username:String,
+        @Field("profile") profile:String
     ) : Call<JoinResponse> //어떤 값을 받아올 지 정하는 부분
 
 }

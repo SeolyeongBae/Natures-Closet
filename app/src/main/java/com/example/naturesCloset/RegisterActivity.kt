@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource
 import com.example.naturesCloset.classDirectory.FeedResponse
 import com.example.naturesCloset.classDirectory.JoinResponse
 import org.json.JSONObject
@@ -34,6 +35,7 @@ class RegisterActivity  : AppCompatActivity() {
     lateinit var phone: String
     lateinit var pass: String
     lateinit var uname: String
+    lateinit var profile: String
 
     val TAG: String = "LoginActivity"
 
@@ -45,9 +47,17 @@ class RegisterActivity  : AppCompatActivity() {
         binding.signUpBtn.setOnClickListener {
 
             Log.d("SENTI", "onClick")
-            phone= binding.TextInputEditTextEmail.getText().toString()
+            phone = binding.TextInputEditTextEmail.getText().toString()
             pass = binding.TextInputEditTextPassword.getText().toString()
             uname  = binding.TextInputEditTextUsername.getText().toString()
+            var defaultImg = getDrawable(R.drawable.applogo) as BitmapDrawable
+            var bitmap = defaultImg.bitmap
+            //bitmap to string
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val bytes = stream.toByteArray()
+
+            profile = java.util.Base64.getEncoder().encodeToString(bytes)
 
             Log.d("The email value", phone)
 
@@ -66,7 +76,7 @@ class RegisterActivity  : AppCompatActivity() {
             .build()
         var registerService: RegisterService = retrofit.create(RegisterService::class.java)
 
-        registerService.requestLogin(phone, pass, uname).enqueue(object :
+        registerService.requestLogin(phone, pass, uname, profile).enqueue(object :
             Callback<JoinResponse> {
             override fun onFailure(call: Call<JoinResponse>, t: Throwable) {
                 Log.e("SHOW", "============Show Error!==========")
